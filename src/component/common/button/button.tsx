@@ -6,7 +6,6 @@ import { CircularProgress, Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import Tooltip from '@common/tooltip/tooltip'
 
-import classNames from 'classnames'
 import classes from './button.module.css'
 
 type TFromBtn = {
@@ -14,14 +13,24 @@ type TFromBtn = {
     title: string
 }
 
-type TLinkBtn = {
+type TBtn = {
     title: string
-    href: string
+    href?: string
     target?: HTMLAttributeAnchorTarget
     tooltipPlacement?: TooltipProps['placement']
 }
 
 export const FormBtn: FC<TFromBtn> = ({ loading, title }) => {
+    const buttonStyles = {
+        backgroundColor: 'var(--secondary)',
+        color: '#fff',
+        fontSize: '1em',
+        fontFamily: 'inherit',
+        textTransform: 'none',
+        borderRadius: '0.25em',
+        padding: '0.25em 1.5em',
+    }
+
     return (
         <LoadingButton
             className={classes.form_btn}
@@ -35,13 +44,14 @@ export const FormBtn: FC<TFromBtn> = ({ loading, title }) => {
             variant="contained"
             title={title}
             type="submit"
+            sx={buttonStyles}
         >
             {title}
         </LoadingButton>
     )
 }
 
-export const LinkButton: FC<AdditionalProps<TLinkBtn>> = ({
+export const LinkButton: FC<AdditionalProps<TBtn>> = ({
     href,
     target,
     title,
@@ -49,16 +59,20 @@ export const LinkButton: FC<AdditionalProps<TLinkBtn>> = ({
     tooltipPlacement,
     className,
 }) => {
+    const buttonStyles = {
+        backgroundColor: 'var(--primary)',
+        color: '#fff',
+        fontSize: '1em',
+        fontFamily: 'inherit',
+        textTransform: 'none',
+        borderRadius: '0.25em',
+        padding: '0.25em 1.5em',
+    }
+
     return (
         <Tooltip title={title} placement={tooltipPlacement}>
-            <Button
-                href={href}
-                target={target}
-                variant="contained"
-                className={classNames(classes.link_btn, className)}
-                sx={{ fontFamily: 'inherit' }}
-            >
-                {children}
+            <Button href={href || ''} target={target} variant="contained" className={className} sx={buttonStyles}>
+                {children || title}
             </Button>
         </Tooltip>
     )
