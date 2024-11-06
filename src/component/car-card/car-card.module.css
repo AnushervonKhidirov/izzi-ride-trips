@@ -1,0 +1,28 @@
+.car_card {
+    display: grid;
+    width: 30rem;
+    grid-template-areas: 'image' 'about' 'btn';
+    grid-auto-rows: max-content;
+    gap: 1.5rem;
+}
+
+.image {
+    width: 100%;
+    aspect-ratio: 2/1.25;
+    grid-area: image;
+    background-color: var(--light);
+}
+
+.about {
+    grid-area: about;
+}
+
+.add_trip_btn {
+    grid-area: btn;
+}
+
+.desc li {
+    grid-auto-flow: column;
+    justify-content: space-between;
+    display: grid;
+}

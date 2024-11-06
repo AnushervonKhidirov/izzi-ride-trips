@@ -1,0 +1,12 @@
+.form {
+    display: grid;
+    gap: 1em;
+}
+
+.form_element > * {
+    font-size: 1em;
+}
+
+.additional_content a {
+    color: var(--primary);
+}

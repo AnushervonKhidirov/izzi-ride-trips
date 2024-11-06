@@ -1,0 +1,48 @@
+.header {
+    display: grid;
+    grid-auto-rows: max-content;
+    gap: 2em;
+    padding: 1em;
+    box-sizing: border-box;
+    box-shadow: 0 0 1em var(--shadow);
+}
+
+.profile_btn {
+    grid-area: profile;
+}
+
+.navigation {
+    grid-area: navigation;
+}
+
+.hamburger_menu {
+    grid-area: hamburger_menu;
+}
+
+/* desktop */
+@media screen and (min-width: 1024px) {
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+}
+
+@media screen and (min-width: 769px) {
+    .header {
+        grid-template-areas: 'profile' 'navigation';
+    }
+}
+
+/* tablet & mobile */
+@media screen and (max-width: 768px) {
+    .header {
+        grid-template-areas: 'profile hamburger_menu';
+    }
+}
+
+/* tablet */
+@media screen and (min-width: 426px) and (max-width: 768px) {
+}
+
+/* mobile */
+@media screen and (max-width: 425px) {
+}

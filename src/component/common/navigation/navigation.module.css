@@ -1,0 +1,13 @@
+.navigation {
+    display: grid;
+    gap: 0.5em;
+}
+
+.navigation_item {
+    transition: all 0.3s;
+}
+
+.navigation_item.active {
+    background-color: var(--secondary);
+    color: #fff;
+}

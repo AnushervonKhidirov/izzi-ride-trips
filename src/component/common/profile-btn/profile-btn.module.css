@@ -1,0 +1,23 @@
+.profile_btn {
+    display: grid;
+    grid-template-areas:
+        'icon .'
+        'icon name'
+        'icon .';
+    grid-template-columns: 3em 1fr;
+    align-content: center;
+    gap: 0 0.5em;
+}
+
+.profile_icon {
+    grid-area: icon;
+    transition: fill 0.3s;
+}
+
+.profile_btn:hover .profile_icon {
+    fill: var(--primary) !important;
+}
+
+.user_name {
+    grid-area: name;
+}
