@@ -1,7 +1,7 @@
 import type { ErrorCustom } from '@type/error'
 import type { TUser, TTokens, TLogInData } from '@type/auth'
 
-import { Endpoint, Token } from '@constant/auth'
+import { Endpoint, Token } from '@constant/request'
 
 type RequestFunc<T, U> = (data: T) => Promise<[null, ErrorCustom<Response>] | [U, null]>
 type TLogInResponse = TUser & TTokens
