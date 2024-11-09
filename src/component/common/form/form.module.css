@@ -10,3 +10,17 @@
 .additional_content a {
     color: var(--primary);
 }
+
+.field:has(.file_field) {
+    justify-self: start;
+}
+
+.file_field {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.file_input {
+    display: none;
+}
