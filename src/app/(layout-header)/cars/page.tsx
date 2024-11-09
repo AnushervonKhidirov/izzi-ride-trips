@@ -1,74 +1,29 @@
+'use client'
 import type { TCar } from '@type/car'
 
+import { useState, useEffect } from 'react'
+
+import Cars from '@service/car/cars'
 import CarList from '@component/car-list/car-list'
 
 const CarsPage = () => {
-    const cars: TCar[] = [
-        {
-            id: 'fadasr-fasdfasdf-adfasdf-asdf',
-            brand: 'Lexus',
-            model: 'RX 350',
-            image: undefined,
-            properties: {
-                type: 'Crossover',
-                seats: 5,
-                plate: '3023 AR 01',
-                year: 2021,
-            },
-        },
-        {
-            id: 'fadasr-fasdfsdf-adfasdf-asdf',
-            brand: 'Lexus',
-            model: 'RX 250',
-            image: undefined,
-            properties: {
-                type: 'Crossover',
-                seats: 4,
-                plate: '3013 AR 01',
-                year: 2021,
-            },
-        },
-        {
-            id: 'fadasr-fasdfsdf-adfasdf-asdfd',
-            brand: 'Lexus',
-            model: 'RX 250',
-            image: undefined,
-            properties: {
-                type: 'Crossover',
-                seats: 4,
-                plate: '3013 AR 01',
-                year: 2021,
-            },
-        },
-        {
-            id: 'fadasr-fasdfdf-adfasdf-asdf',
-            brand: 'Lexus',
-            model: 'RX 250',
-            image: undefined,
-            properties: {
-                type: 'Crossover',
-                seats: 4,
-                plate: '3013 AR 01',
-                year: 2021,
-            },
-        },
-        {
-            id: 'fadasr-fasdfsdf-adfasf-asdf',
-            brand: 'Lexus',
-            model: 'RX 250',
-            image: undefined,
-            properties: {
-                type: 'Crossover',
-                seats: 4,
-                plate: '3013 AR 01',
-                year: 2021,
-            },
-        },
-    ]
+    const cars = new Cars()
+    const [carList, setCarList] = useState<TCar[]>([])
+
+    async function getData() {
+        const [data, err] = await cars.fetchCars()
+        if (err) return
+        setCarList(data)
+    }
+
+    useEffect(() => {
+        getData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div>
-            <CarList title="Your cars" list={cars} />
+            <CarList title="Your cars" list={carList} />
         </div>
     )
 }
