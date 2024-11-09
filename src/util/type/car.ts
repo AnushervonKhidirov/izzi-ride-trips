@@ -1,15 +1,4 @@
-// export type TCar = {
-//     id: string
-//     brand: string
-//     model: string | undefined
-//     type: string
-//     seats: number
-//     year: number
-//     plate: string
-//     image: string | undefined
-// }
-
-export type TCar = {
+export type TCar = Readonly<{
     id: string
     brand: string
     model: string | undefined
@@ -17,4 +6,4 @@ export type TCar = {
     properties: {
         [key: string]: string | number
     }
-}
+}>
