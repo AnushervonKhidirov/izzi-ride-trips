@@ -1,0 +1,4 @@
+.form button[type='submit'] {
+    justify-self: self-end;
+    font-size: 1.25em;
+}
