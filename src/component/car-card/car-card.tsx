@@ -1,72 +1,52 @@
 import type { FC } from 'react'
-import type { AdditionalProps } from '@type/common'
 import type { TCar } from '@type/car'
+
+import Car, { TProperty } from '@service/car/car'
 
 import Image, { StaticImageData } from 'next/image'
 import Card from '@common/card/card'
 import { LinkButton } from '@common/button/button'
 
-import carImage from '@public/images/car.png'
-import { Page } from '@constant/links'
-import { linkGenerator } from '@helper/link-generator'
-import classNames from 'classnames'
-
 import classes from './car-card.module.css'
 
-type TCarProps = {
-    car: TCar
-}
-
-const CarCard: FC<AdditionalProps<TCarProps>> = ({ car, className }) => {
-    const addTripLink = linkGenerator(Page.CreateTrip, { car: car.id })
+const CarCard: FC<{ carData: TCar }> = ({ carData }) => {
+    const car = new Car(carData)
 
     return (
-        <Card className={classNames(classes.car_card, className)}>
-            <CarImage image={carImage} title={car.brand} />
-
-            <About car={car} />
-
-            <LinkButton href={addTripLink} title="Add trip" className={classes.add_trip_btn} />
+        <Card className={classes.car_card}>
+            <CarImage image={car.getImageData()} title={car.getCarName()} />
+            <About title={car.getCarName()} properties={car.getProperties()} />
+            <LinkButton href={car.getAddTripUrl()} title="Add trip" className={classes.add_trip_btn} />
         </Card>
     )
 }
 
-const CarImage: FC<{ title: string; image: StaticImageData | string }> = ({ title, image }) => {
-    const imageData = typeof image === 'object' ? image : { src: image, width: 300, height: 300 }
-    return <Image src={imageData.src} width={imageData.width} height={imageData.height} alt={title} className={classes.image} />
+const CarImage: FC<{ title: string; image: StaticImageData }> = ({ title, image }) => {
+    const { src, width, height } = image
+    return <Image src={src} width={width} height={height} alt={title} className={classes.image} />
 }
 
-const About: FC<TCarProps> = ({ car }) => {
-    const { brand, model } = car
-
+const About: FC<{ title: string; properties: TProperty[] }> = ({ title, properties }) => {
     return (
         <div className={classes.about}>
-            <h4 className={classes.title}>
-                {brand} {model}
-            </h4>
+            <h4 className={classes.title}>{title}</h4>
 
-            <Desc car={car} />
+            <Desc properties={properties} />
         </div>
     )
 }
 
-const Desc: FC<TCarProps> = ({ car }) => {
-    const { type, seats, year, plate } = car
-
+const Desc: FC<{ properties: TProperty[] }> = ({ properties }) => {
     return (
-        <ul className={classes.desc}>
-            <li>
-                <span>Type:</span> <span>{type}</span>
-            </li>
-            <li>
-                <span>Seats:</span> <span>{seats}</span>
-            </li>
-            <li>
-                <span>Year:</span> <span>{year}</span>
-            </li>
-            <li>
-                <span>Plate:</span> <span>{plate}</span>
-            </li>
+        <ul className={classes.properties}>
+            {properties.map(property => {
+                return (
+                    <li key={property.key}>
+                        <span>{property.name}:</span>
+                        <span>{property.value}</span>
+                    </li>
+                )
+            })}
         </ul>
     )
 }

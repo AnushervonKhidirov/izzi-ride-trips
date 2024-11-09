@@ -27,6 +27,7 @@
             "@component/*": ["./src/component/*"],
             "@store/*": ["./src/service/store/*"],
             "@middleware/*": ["./src/service/middleware/*"],
+            "@service/*": ["./src/service/*"],
             "@constant/*": ["./src/util/constant/*"],
             "@helper/*": ["./src/util/helper/*"],
             "@type/*": ["./src/util/type/*"],

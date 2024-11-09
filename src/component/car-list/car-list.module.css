@@ -1,0 +1,9 @@
+.headline {
+    margin-bottom: 3rem;
+}
+
+.car_list {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    gap: 3rem;
+}

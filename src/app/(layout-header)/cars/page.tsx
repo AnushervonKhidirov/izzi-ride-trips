@@ -1,21 +1,74 @@
 import type { TCar } from '@type/car'
 
-import CarCard from '@component/car-card/car-card'
+import CarList from '@component/car-list/car-list'
 
 const CarsPage = () => {
-    const carData: TCar = {
-        id: 'fadasr-fasdfasdf-adfasdf-asdf',
-        brand: 'Lexus',
-        model: 'RX 350',
-        type: 'Crossover',
-        seats: 5,
-        plate: '3023 AR 01',
-        year: 2021,
-    }
+    const cars: TCar[] = [
+        {
+            id: 'fadasr-fasdfasdf-adfasdf-asdf',
+            brand: 'Lexus',
+            model: 'RX 350',
+            image: undefined,
+            properties: {
+                type: 'Crossover',
+                seats: 5,
+                plate: '3023 AR 01',
+                year: 2021,
+            },
+        },
+        {
+            id: 'fadasr-fasdfsdf-adfasdf-asdf',
+            brand: 'Lexus',
+            model: 'RX 250',
+            image: undefined,
+            properties: {
+                type: 'Crossover',
+                seats: 4,
+                plate: '3013 AR 01',
+                year: 2021,
+            },
+        },
+        {
+            id: 'fadasr-fasdfsdf-adfasdf-asdfd',
+            brand: 'Lexus',
+            model: 'RX 250',
+            image: undefined,
+            properties: {
+                type: 'Crossover',
+                seats: 4,
+                plate: '3013 AR 01',
+                year: 2021,
+            },
+        },
+        {
+            id: 'fadasr-fasdfdf-adfasdf-asdf',
+            brand: 'Lexus',
+            model: 'RX 250',
+            image: undefined,
+            properties: {
+                type: 'Crossover',
+                seats: 4,
+                plate: '3013 AR 01',
+                year: 2021,
+            },
+        },
+        {
+            id: 'fadasr-fasdfsdf-adfasf-asdf',
+            brand: 'Lexus',
+            model: 'RX 250',
+            image: undefined,
+            properties: {
+                type: 'Crossover',
+                seats: 4,
+                plate: '3013 AR 01',
+                year: 2021,
+            },
+        },
+    ]
 
     return (
         <div>
-            <CarCard car={carData} />
+            <CarList title="Your cars" list={cars} />
         </div>
     )
 }
