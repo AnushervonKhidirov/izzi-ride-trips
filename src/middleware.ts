@@ -1,5 +1,5 @@
-import { middlewareChain } from './service/middleware/chain'
-import { authMiddleware } from './service/middleware/auth'
+import { middlewareChain } from '@middleware/chain'
+import { authMiddleware } from '@middleware/auth'
 import { protectedRouteMiddleware } from '@middleware/protected-route'
 
 export default middlewareChain([authMiddleware, protectedRouteMiddleware])
