@@ -17,6 +17,7 @@ type TBtn = {
     title: string
     href?: string
     target?: HTMLAttributeAnchorTarget
+    onClick?: () => void
     tooltip?: boolean
     tooltipPlacement?: TooltipProps['placement']
 }
@@ -58,6 +59,7 @@ export const LinkButton: FC<AdditionalProps<TBtn>> = ({
     children,
     tooltip = false,
     tooltipPlacement,
+    onClick,
     className,
 }) => {
     const buttonStyles = {
@@ -72,12 +74,12 @@ export const LinkButton: FC<AdditionalProps<TBtn>> = ({
 
     return tooltip ? (
         <Tooltip title={title} placement={tooltipPlacement}>
-            <Button href={href ?? ''} target={target} variant="contained" className={className} sx={buttonStyles}>
+            <Button href={href ?? ''} target={target} onClick={onClick} variant="contained" className={className} sx={buttonStyles}>
                 {children || title}
             </Button>
         </Tooltip>
     ) : (
-        <Button href={href ?? ''} target={target} variant="contained" className={className} sx={buttonStyles}>
+        <Button href={href ?? ''} target={target} onClick={onClick} variant="contained" className={className} sx={buttonStyles}>
             {children || title}
         </Button>
     )
