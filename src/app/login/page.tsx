@@ -6,12 +6,14 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Form from '@common/form/form'
 
+import Auth from '@service/auth/auth'
+
 import { logInInputs } from '@constant/form'
 
-import { logIn } from '../../../src/api/auth-api'
 import { addCookies } from '@helper/cookies'
 
 const LogIn = () => {
+    const auth = new Auth()
     const [loading, setLoading] = useState(false)
     const router = useRouter()
 
@@ -23,7 +25,7 @@ const LogIn = () => {
         const formData = new FormData(e.currentTarget)
         const body = Object.fromEntries(formData) as TLogInData
 
-        const [user, err] = await logIn(body)
+        const [user, err] = await auth.logIn(body)
 
         setLoading(false)
 

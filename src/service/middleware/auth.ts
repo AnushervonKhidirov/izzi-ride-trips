@@ -3,12 +3,15 @@ import type { NextMiddleware } from 'next/server'
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
-import { getUserWithRefresh } from '../../api/auth-api'
+import Auth from '@service/auth/auth'
+
 import { Headers } from '@constant/headers'
 import { Page } from '@constant/links'
 import { Token } from '../../util/constant/request'
 
 export function authMiddleware(nextMiddleware: NextMiddleware): NextMiddleware {
+    const auth = new Auth()
+
     return async (request, event) => {
         const cookieStore = cookies()
 
@@ -16,7 +19,7 @@ export function authMiddleware(nextMiddleware: NextMiddleware): NextMiddleware {
         const refreshToken = cookieStore.get(Token.RefreshKey)?.value
 
         if (accessToken && refreshToken) {
-            const [user, err] = await getUserWithRefresh({
+            const [user, err] = await auth.getUserWithRefresh({
                 accessToken: accessToken,
                 refreshToken: refreshToken,
             })
