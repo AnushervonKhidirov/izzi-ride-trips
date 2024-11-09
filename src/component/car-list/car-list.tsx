@@ -7,17 +7,13 @@ import CarCard from '@component/car-card/car-card'
 import classNames from 'classnames'
 import classes from './car-list.module.css'
 
-const CarList: FC<AdditionalProps<{ title?: string; list: TCar[] }>> = ({ title, list, className }) => {
+const CarList: FC<AdditionalProps<{ list: TCar[] }>> = ({ list, className }) => {
     return (
-        <div className={classNames(classes.cars, className)}>
-            {title && <h2 className={classes.headline}>{title}</h2>}
-
-            <ul className={classes.car_list}>
-                {list.map(car => {
-                    return <CarCard carData={car} key={car.id} />
-                })}
-            </ul>
-        </div>
+        <ul className={classNames(classes.car_list, className)}>
+            {list.map(car => {
+                return <CarCard carData={car} key={car.id} />
+            })}
+        </ul>
     )
 }
 

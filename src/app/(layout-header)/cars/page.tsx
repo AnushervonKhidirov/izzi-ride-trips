@@ -4,6 +4,8 @@ import type { TCar } from '@type/car'
 import { useState, useEffect } from 'react'
 
 import Cars from '@service/car/cars'
+
+import Section from '@common/section/section'
 import CarList from '@component/car-list/car-list'
 
 const CarsPage = () => {
@@ -18,13 +20,13 @@ const CarsPage = () => {
 
     useEffect(() => {
         getData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
-        <div>
-            <CarList title="Your cars" list={carList} />
-        </div>
+        <Section title="Your cars">
+            <CarList list={carList} />
+        </Section>
     )
 }
 
