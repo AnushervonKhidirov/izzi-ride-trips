@@ -1,7 +1,7 @@
 import type { FC } from 'react'
-import type { TCar } from '@type/car'
+import type { TCar, TProperty } from '@type/car'
 
-import Car, { TProperty } from '@service/car/car'
+import Car from '@service/car/car'
 
 import Image, { StaticImageData } from 'next/image'
 import Card from '@common/card/card'
