@@ -43,7 +43,6 @@ export const FormBtn: FC<TFromBtn> = ({ loading, title }) => {
             }
             size="medium"
             variant="contained"
-            title={title}
             type="submit"
             sx={buttonStyles}
         >
