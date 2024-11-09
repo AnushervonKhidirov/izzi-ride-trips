@@ -8,6 +8,8 @@ import Cars from '@service/car/cars'
 import Section from '@common/section/section'
 import CarList from '@component/car-list/car-list'
 
+import { LinkButton } from '@common/button/button'
+
 const CarsPage = () => {
     const cars = new Cars()
     const [carList, setCarList] = useState<TCar[]>([])
@@ -25,7 +27,9 @@ const CarsPage = () => {
 
     return (
         <Section title="Your cars">
-            <CarList list={carList} />
+            <CarList list={carList}>
+                <LinkButton title="Add New Car" href={cars.getCreateCarUrl()} />
+            </CarList>
         </Section>
     )
 }

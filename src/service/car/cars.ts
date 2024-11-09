@@ -1,11 +1,16 @@
 import type { ICars, TCar } from '@type/car'
+import type { ErrorCustom } from '@type/error'
 
 import axios from 'axios'
 
+import { Page } from '@constant/links'
 import { Endpoint } from '@constant/request'
-import { ErrorCustom } from '@type/error'
 
 export default class Cars implements ICars {
+    getCreateCarUrl() {
+        return `${Page.CreateCar}`
+    }
+
     async fetchCars(): Promise<[TCar[], null] | [null, ErrorCustom<Response>]> {
         try {
             const response = await axios.get<TCar[]>(Endpoint.Cars)

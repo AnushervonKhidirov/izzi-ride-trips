@@ -2,6 +2,7 @@ import type { StaticImageData } from 'next/image'
 
 // Cars
 export interface ICars {
+    getCreateCarUrl: () => string
     fetchCars: () => Promise<[TCar[], null] | [null, any]>
 }
 
