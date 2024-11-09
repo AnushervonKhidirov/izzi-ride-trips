@@ -4,6 +4,29 @@
 
 .car_list {
     display: grid;
-    grid-template-columns: repeat(4, max-content);
     gap: 3rem;
+}
+
+@media screen and (min-width: 1440px) {
+    .car_list {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1440px) {
+    .car_list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (min-width: 426px) and (max-width: 1200px) {
+    .car_list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .car_list {
+        grid-template-columns: 1fr;
+    }
 }
