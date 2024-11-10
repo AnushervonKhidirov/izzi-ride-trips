@@ -24,9 +24,20 @@ export type TCar = Readonly<{
     id: string
     brand: string
     model: string | undefined
-    type: string
+    type: TCarType
     seats: number
     plate: string
     year: number
     image: string | undefined
 }>
+
+export type TCarType =
+    | 'Off-road vehicles'
+    | 'Minivans'
+    | 'Luxury saloon / Full-size luxury'
+    | 'City car / Minicompact'
+    | 'Supermini / Subcompact'
+    | 'Executive / Full-size'
+    | 'Small family / Compac'
+    | 'Large family / Mid-size'
+    | 'Sports'
