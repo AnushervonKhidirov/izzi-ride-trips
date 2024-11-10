@@ -1,5 +1,6 @@
 import type { FC } from 'react'
-import type { TCar, TProperty } from '@type/car'
+import type { TCar } from '@type/car'
+import type { TProperty } from '@type/common'
 
 import Car from '@service/car/car'
 
@@ -13,7 +14,7 @@ const CarCard: FC<{ carData: TCar }> = ({ carData }) => {
     const car = new Car(carData)
 
     return (
-        <Card className={classes.car_card}>
+        <Card className={classes.car_card} tag="li">
             <CarImage image={car.getImageData()} title={car.getCarName()} />
             <About title={car.getCarName()} properties={car.getProperties()} />
             <LinkButton href={car.getAddTripUrl()} title="Add trip" className={classes.add_trip_btn} />

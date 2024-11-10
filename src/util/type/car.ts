@@ -1,4 +1,5 @@
 import type { StaticImageData } from 'next/image'
+import type { TProperty } from './common'
 
 // Cars
 export interface ICars {
@@ -12,12 +13,6 @@ export interface ICar extends TCar {
     getImageData: () => StaticImageData
     getCarName: () => string
     getProperties: () => TProperty[]
-}
-
-export type TProperty = {
-    key: string
-    name: string
-    value: string | number
 }
 
 export type TCar = Readonly<{

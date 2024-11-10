@@ -15,7 +15,11 @@ const CarList: FC<AdditionalProps<{ list: TCar[] }>> = ({ list, className, child
                 return <CarCard carData={car} key={car.id} />
             })}
 
-            {children && <Card className={classes.additional_card}>{children}</Card>}
+            {children && (
+                <Card className={classes.additional_card} tag="li">
+                    {children}
+                </Card>
+            )}
         </ul>
     )
 }
