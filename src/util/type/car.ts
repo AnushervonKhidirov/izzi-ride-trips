@@ -7,6 +7,7 @@ import { TNavigationData } from './navigation'
 export interface ICars {
     getCreateCarUrl: () => string
     fetchCars: () => Promise<[TCar[], null] | [null, ErrorCustom<Response>]>
+    fetchCar: (id: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
 }
 
 // Car
@@ -23,8 +24,9 @@ export type TCar = Readonly<{
     id: string
     brand: string
     model: string | undefined
+    type: string
+    seats: number
+    plate: string
+    year: number
     image: string | undefined
-    properties: {
-        [key: string]: string | number
-    }
 }>

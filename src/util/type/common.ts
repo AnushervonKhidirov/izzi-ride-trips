@@ -6,7 +6,6 @@ export type AdditionalProps<T> = T &
     }
 
 export type TProperty = {
-    key: string
     name: string
     value: string | number
 }

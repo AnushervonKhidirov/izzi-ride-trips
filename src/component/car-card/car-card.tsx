@@ -43,7 +43,7 @@ const Desc: FC<{ properties: TProperty[] }> = ({ properties }) => {
         <ul className={classes.properties}>
             {properties.map(property => {
                 return (
-                    <li key={property.key}>
+                    <li key={property.name}>
                         <span>{property.name}:</span>
                         <span>{property.value}</span>
                     </li>

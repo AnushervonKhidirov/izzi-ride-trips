@@ -1,4 +1,5 @@
 import type { TCar, ICar } from '@type/car'
+import type { TProperty } from '@type/common'
 
 import { linkGenerator } from '@helper/link-generator'
 import { Page } from '@constant/links'
@@ -9,14 +10,20 @@ export default class Car implements ICar {
     readonly brand: string
     readonly model: string | undefined
     readonly image: string | undefined
-    readonly properties: { [key: string]: string | number }
+    readonly seats: number
+    readonly type: string
+    readonly plate: string
+    readonly year: number
 
     constructor(car: TCar) {
         this.id = car.id
         this.brand = car.brand
         this.model = car.model
         this.image = car.image
-        this.properties = car.properties
+        this.seats = car.seats
+        this.type = car.type
+        this.plate = car.plate
+        this.year = car.year
     }
 
     getAddTripUrl() {
@@ -50,17 +57,24 @@ export default class Car implements ICar {
     }
 
     getProperties() {
-        const properties = []
-
-        for (const property in this.properties) {
-            const name = (property.charAt(0).toUpperCase() + property.slice(1)).replaceAll('_', ' ')
-
-            properties.push({
-                key: property,
-                name: name,
-                value: this.properties[property],
-            })
-        }
+        const properties: TProperty[] = [
+            {
+                name: 'Type',
+                value: this.type,
+            },
+            {
+                name: 'Year',
+                value: this.year,
+            },
+            {
+                name: 'Seats',
+                value: this.seats,
+            },
+            {
+                name: 'Plate',
+                value: this.plate,
+            },
+        ]
 
         return properties
     }
