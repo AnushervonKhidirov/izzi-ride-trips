@@ -76,7 +76,13 @@ ul {
 }
 
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1441px) {
+    html {
+        font-size: 0.5vw;
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
     html {
         font-size: 10px;
     }
@@ -85,18 +91,6 @@ ul {
 @media screen and (min-width: 426px) and (max-width: 1024px) {
     html {
         font-size: 1vw;
-    }
-}
-
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    html {
-        font-size: 1vw;
-    }
-}
-
-@media screen and (min-width: 426px) and (max-width: 768px) {
-    html {
-        font-size: 1.25vw;
     }
 }
 
