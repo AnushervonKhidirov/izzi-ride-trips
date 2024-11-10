@@ -1,4 +1,4 @@
-import { TProperty } from '@type/common'
+import type { TProperty } from '@type/common'
 import type { ITrip, TTrip } from '@type/trip'
 
 export default class Trip implements ITrip {

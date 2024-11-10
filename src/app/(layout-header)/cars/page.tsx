@@ -1,5 +1,6 @@
 'use client'
 import type { TCar } from '@type/car'
+import type { TStyles } from '@type/common'
 
 import { useState, useEffect } from 'react'
 
@@ -20,6 +21,13 @@ const CarsPage = () => {
         setCarList(data)
     }
 
+    const btnStyles: TStyles = {
+        position: 'absolute',
+        inset: 0,
+        fontSize: '1.5em',
+        borderRadius: 0,
+    }
+
     useEffect(() => {
         getData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,7 +36,7 @@ const CarsPage = () => {
     return (
         <Section title="Your cars">
             <CarList list={carList}>
-                <LinkButton title="Add New Car" href={cars.getCreateCarUrl()} />
+                <LinkButton title="Add New Car" href={cars.getCreateCarUrl()} sx={btnStyles} />
             </CarList>
         </Section>
     )

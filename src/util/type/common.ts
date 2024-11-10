@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react'
+import type { HTMLAttributes, PropsWithChildren } from 'react'
 
 export type AdditionalProps<T> = T &
     PropsWithChildren & {
@@ -10,3 +10,5 @@ export type TProperty = {
     name: string
     value: string | number
 }
+
+export type TStyles = HTMLAttributes<HTMLElement>['style']

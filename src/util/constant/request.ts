@@ -3,6 +3,7 @@ export enum Endpoint {
     User = 'https://dummyjson.com/auth/me',
     RefreshToken = 'https://dummyjson.com/auth/refresh',
     Cars = 'https://dummyjson.com/c/2f15-f1ff-4ac9-8f02',
+    Trips = 'https://dummyjson.com/c/783b-3927-4b48-9add',
 }
 
 export enum Token {

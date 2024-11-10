@@ -1,8 +1,10 @@
-import { TProperty } from './common'
+import type { TProperty } from './common'
+import type { ErrorCustom } from './error'
 
 // Trips
 export interface ITrips {
-    fetchTrips: () => Promise<[TTrip[], null] | [null, any]>
+    getCreateTripUrl: () => string
+    fetchTrips: () => Promise<[TTrip[], null] | [null, ErrorCustom<Response>]>
 }
 
 // trip

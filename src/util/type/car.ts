@@ -1,10 +1,11 @@
 import type { StaticImageData } from 'next/image'
 import type { TProperty } from './common'
+import type { ErrorCustom } from './error'
 
 // Cars
 export interface ICars {
     getCreateCarUrl: () => string
-    fetchCars: () => Promise<[TCar[], null] | [null, any]>
+    fetchCars: () => Promise<[TCar[], null] | [null, ErrorCustom<Response>]>
 }
 
 // Car

@@ -1,6 +1,6 @@
 import type { FC, HTMLAttributeAnchorTarget } from 'react'
 import type { TooltipProps } from '@mui/material'
-import type { AdditionalProps } from '@type/common'
+import type { AdditionalProps, TStyles } from '@type/common'
 
 import { CircularProgress, Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
@@ -20,6 +20,7 @@ type TBtn = {
     onClick?: () => void
     tooltip?: boolean
     tooltipPlacement?: TooltipProps['placement']
+    sx?: TStyles
 }
 
 export const FormBtn: FC<TFromBtn> = ({ loading, title }) => {
@@ -61,6 +62,7 @@ export const LinkButton: FC<AdditionalProps<TBtn>> = ({
     tooltipPlacement,
     onClick,
     className,
+    sx,
 }) => {
     const buttonStyles = {
         backgroundColor: 'var(--primary)',
@@ -70,16 +72,31 @@ export const LinkButton: FC<AdditionalProps<TBtn>> = ({
         textTransform: 'none',
         borderRadius: '0.25em',
         padding: '0.25em 1.5em',
+        ...sx,
     }
 
     return tooltip ? (
         <Tooltip title={title} placement={tooltipPlacement}>
-            <Button href={href ?? ''} target={target} onClick={onClick} variant="contained" className={className} sx={buttonStyles}>
+            <Button
+                href={href ?? ''}
+                target={target}
+                onClick={onClick}
+                variant="contained"
+                className={className}
+                sx={buttonStyles}
+            >
                 {children || title}
             </Button>
         </Tooltip>
     ) : (
-        <Button href={href ?? ''} target={target} onClick={onClick} variant="contained" className={className} sx={buttonStyles}>
+        <Button
+            href={href ?? ''}
+            target={target}
+            onClick={onClick}
+            variant="contained"
+            className={className}
+            sx={buttonStyles}
+        >
             {children || title}
         </Button>
     )
