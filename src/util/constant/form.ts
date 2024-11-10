@@ -1,5 +1,7 @@
 import type { TextFieldProps } from '@mui/material'
 
+import carImage from '@public/images/car.png'
+
 export const logInInputs: TextFieldProps[] = [
     {
         name: 'username',
@@ -16,6 +18,11 @@ export const logInInputs: TextFieldProps[] = [
 ]
 
 export const createCarInputs: TextFieldProps[] = [
+    {
+        name: 'image',
+        type: 'image',
+        placeholder: carImage.src,
+    },
     {
         name: 'brand',
         type: 'text',
@@ -48,9 +55,5 @@ export const createCarInputs: TextFieldProps[] = [
         type: 'text',
         label: 'Plate',
         required: true,
-    },
-    {
-        name: 'image',
-        type: 'file',
     },
 ]

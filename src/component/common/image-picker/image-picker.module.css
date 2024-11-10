@@ -1,0 +1,36 @@
+.image_field {
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-template-areas: '. image' 'file image' 'button image';
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem 2rem;
+}
+
+.image_btn {
+    grid-area: button;
+}
+
+.image_name {
+    grid-area: file;
+}
+
+.image {
+    width: 30rem;
+    height: auto;
+    aspect-ratio: 2/1.25;
+    grid-area: image;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1rem;
+}
+
+.image.placeholder {
+    background-color: var(--light);
+    object-fit: contain;
+    padding: 2rem;
+}
+
+.file_input {
+    display: none;
+}
