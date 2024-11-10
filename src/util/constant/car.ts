@@ -1,4 +1,6 @@
-const carTypes = [
+import type { TCarType } from '@type/car'
+
+const carTypes: TCarType[] = [
     'Off-road vehicles',
     'Minivans',
     'Luxury saloon / Full-size luxury',
