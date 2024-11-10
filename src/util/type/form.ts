@@ -9,3 +9,10 @@ export type TForm = {
     className?: string
     children?: ReactNode
 }
+
+export type TEditableField = {
+    title: string
+    value: string | number
+    editing?: boolean
+    editable?: boolean
+}
