@@ -1,7 +1,8 @@
 import type { StaticImageData } from 'next/image'
 import type { TProperty } from './common'
 import type { ErrorCustom } from './error'
-import { TNavigationData } from './navigation'
+import type { TNavigationData } from './navigation'
+import type { TEditableField } from './form'
 
 // Cars
 export interface ICars {
@@ -18,6 +19,7 @@ export interface ICar extends TCar {
     getImageData: () => StaticImageData
     getCarName: () => string
     getProperties: () => TProperty[]
+    getEditableFields: () => TEditableField[]
 }
 
 export type TCar = Readonly<{

@@ -1,5 +1,6 @@
-import type { TCar, ICar } from '@type/car'
+import type { TCar, ICar, TCarType } from '@type/car'
 import type { TProperty } from '@type/common'
+import type { TEditableField } from '@type/form'
 
 import { linkGenerator } from '@helper/link-generator'
 import { Page } from '@constant/links'
@@ -11,7 +12,7 @@ export default class Car implements ICar {
     readonly model: string | undefined
     readonly image: string | undefined
     readonly seats: number
-    readonly type: string
+    readonly type: TCarType
     readonly plate: string
     readonly year: number
 
@@ -77,5 +78,41 @@ export default class Car implements ICar {
         ]
 
         return properties
+    }
+
+    getEditableFields() {
+        const editableFields: TEditableField[] = [
+            {
+                title: 'Model',
+                name: 'model',
+                value: this.model ?? '',
+                editable: true,
+            },
+            {
+                title: 'Type',
+                name: 'type',
+                value: this.type,
+                editable: true,
+            },
+            {
+                title: 'Year',
+                name: 'year',
+                value: this.year,
+                editable: true,
+            },
+            {
+                title: 'Seats',
+                name: 'seats',
+                value: this.seats,
+                editable: true,
+            },
+            {
+                title: 'Plate',
+                name: 'plate',
+                value: this.plate,
+                editable: true,
+            },
+        ]
+        return editableFields
     }
 }

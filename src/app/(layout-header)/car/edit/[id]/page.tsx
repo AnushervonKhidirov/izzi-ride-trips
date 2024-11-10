@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 
 import Cars from '@service/car/cars'
-import EditableField from '@common/editable-field/editable-field'
+// import EditableFieldList from '@common/editable-field-list/editable-field-list'
+import CarEditableFields from '@component/car-editable-fields/car-editable-fields'
 
 import Section from '@common/section/section'
 
@@ -27,12 +28,7 @@ const EditCarPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    return <Section title="Edit Car">
-        <EditableField title='hello 0' value="hello value 0" editing/>
-        <EditableField title='hello 1' value="hello value 1" editing/>
-        <EditableField title='hello 2' value="hello value 2" editing/>
-        <EditableField title='hello 3' value="hello value 3" editing/>
-    </Section>
+    return <Section title="Edit Car">{carData && <CarEditableFields carData={carData} />}</Section>
 }
 
 export default EditCarPage

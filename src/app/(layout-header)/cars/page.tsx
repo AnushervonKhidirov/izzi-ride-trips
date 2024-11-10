@@ -19,8 +19,6 @@ const CarsPage = () => {
         const [data, err] = await cars.fetchCars()
         if (err) return
         setCarList(data)
-        console.log('data', data);
-        
     }
 
     const btnStyles: TStyles = {
