@@ -12,6 +12,7 @@ export type TForm = {
 
 export type TEditableField = {
     title: string
+    name: string
     value: string | number
     editing?: boolean
     editable?: boolean

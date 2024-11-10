@@ -7,7 +7,7 @@ import { useState } from 'react'
 import classes from './editable-field.module.css'
 import { Input } from '@mui/material'
 
-const EditableField: FC<TEditableField> = ({ title, value, editing, editable = true }) => {
+const EditableField: FC<TEditableField> = ({ title, name, value, editing, editable = true }) => {
     const [fieldValue, setFieldValue] = useState(value)
 
     return (
@@ -17,7 +17,7 @@ const EditableField: FC<TEditableField> = ({ title, value, editing, editable = t
             {editable ? (
                 <Input
                     className={classes.value}
-                    name={title.toLowerCase()}
+                    name={name}
                     value={fieldValue}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFieldValue(event.target.value)}
                     readOnly={!editing}
