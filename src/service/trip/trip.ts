@@ -30,7 +30,11 @@ export default class Trip implements ITrip {
 
     getDate(timestamp: number) {
         const date = new Date(timestamp)
-        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+
+        const day = date.toDateString().split(' ').slice(1).join(' ')
+        const time = `${date.toLocaleTimeString().split(':').slice(0, 2).join(':')} ${date.toLocaleTimeString().split(' ').at(-1)}`
+        
+        return `${day} at ${time}`
     }
 
     getProperties() {
