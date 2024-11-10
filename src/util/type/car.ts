@@ -1,6 +1,7 @@
 import type { StaticImageData } from 'next/image'
 import type { TProperty } from './common'
 import type { ErrorCustom } from './error'
+import { TNavigationData } from './navigation'
 
 // Cars
 export interface ICars {
@@ -11,6 +12,8 @@ export interface ICars {
 // Car
 export interface ICar extends TCar {
     getAddTripUrl: () => string
+    getEditCarUrl: () => string
+    getActionButtons: () => TNavigationData[]
     getImageData: () => StaticImageData
     getCarName: () => string
     getProperties: () => TProperty[]
