@@ -8,7 +8,7 @@ import { Endpoint } from '@constant/request'
 
 export default class Cars implements ICars {
     getCreateCarUrl() {
-        return Page.CreateCar
+        return Page.AddCar
     }
 
     async fetchCars(): Promise<[TCar[], null] | [null, ErrorCustom<Response>]> {

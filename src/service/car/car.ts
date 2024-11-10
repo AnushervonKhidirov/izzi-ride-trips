@@ -20,7 +20,25 @@ export default class Car implements ICar {
     }
 
     getAddTripUrl() {
-        return linkGenerator(Page.CreateTrip, { car: this.id })
+        return linkGenerator(Page.AddTrip, { car: this.id })
+    }
+
+    getEditCarUrl() {
+        return Page.EditCar.replace('[id]', this.id)
+    }
+
+    getActionButtons() {
+        const actionButtons = [
+            {
+                title: 'Add Trip',
+                href: this.getAddTripUrl(),
+            },
+            {
+                title: 'Edit Car',
+                href: this.getEditCarUrl(),
+            },
+        ]
+        return actionButtons
     }
 
     getImageData() {

@@ -17,8 +17,10 @@
     grid-area: about;
 }
 
-.add_trip_btn {
+.action_buttons {
     grid-area: btn;
+    display: grid;
+    gap: 1rem;
 }
 
 .properties li {

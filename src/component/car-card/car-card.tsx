@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import type { TCar } from '@type/car'
 import type { TProperty } from '@type/common'
+import type { TNavigationData } from '@type/navigation'
 
 import Car from '@service/car/car'
 
@@ -17,7 +18,7 @@ const CarCard: FC<{ carData: TCar }> = ({ carData }) => {
         <Card className={classes.car_card} tag="li">
             <CarImage image={car.getImageData()} title={car.getCarName()} />
             <About title={car.getCarName()} properties={car.getProperties()} />
-            <LinkButton href={car.getAddTripUrl()} title="Add trip" className={classes.add_trip_btn} />
+            <Actions links={car.getActionButtons()} />
         </Card>
     )
 }
@@ -49,6 +50,16 @@ const Desc: FC<{ properties: TProperty[] }> = ({ properties }) => {
                 )
             })}
         </ul>
+    )
+}
+
+const Actions: FC<{ links: TNavigationData[] }> = ({ links }) => {
+    return (
+        <div className={classes.action_buttons}>
+            {links.map(({ href, title }) => {
+                return <LinkButton href={href} title={title} className={classes.add_trip_btn} key={href} />
+            })}
+        </div>
     )
 }
 
