@@ -1,17 +1,22 @@
 import type { FC, ChangeEvent } from 'react'
 import type { TextFieldProps } from '@mui/material'
+import type { AdditionalProps } from '@type/common'
 
 import { useRef, useState } from 'react'
 
 import Image from 'next/image'
+import EditIcon from '@mui/icons-material/Edit'
+import IconButton from '@mui/material/IconButton'
 import { LinkButton } from '@common/button/button'
 
 import classNames from 'classnames'
 import classes from './image-picker.module.css'
 
-const ImagePicker: FC<TextFieldProps> = ({ id, name, placeholder, required }) => {
-    console.log('placeholder', placeholder)
+type TImagePicker = TextFieldProps & {
+    formPart?: boolean
+}
 
+const ImagePicker: FC<AdditionalProps<TImagePicker>> = ({ id, name, placeholder, required, formPart = true }) => {
     const inputRef = useRef<HTMLInputElement>(null)
     const [fileName, setFileName] = useState<string | null>(null)
     const [filePath, setFilePath] = useState<string>(placeholder ?? '')
@@ -24,15 +29,25 @@ const ImagePicker: FC<TextFieldProps> = ({ id, name, placeholder, required }) =>
         const files = e.target.files
         if (!files) return
 
-        console.log(files[0])
-
         setFileName(files[0].name)
         setFilePath(URL.createObjectURL(files[0]))
     }
 
     return (
-        <div className={classes.image_field}>
-            <LinkButton title="Add Car Image" onClick={choseFile} className={classes.image_btn} />
+        <div
+            className={classNames(
+                classes.image_field,
+                { [classes.form_field]: formPart },
+                { [classes.editable_mode]: !formPart },
+            )}
+        >
+            {formPart ? (
+                <LinkButton title="Add Car Image" onClick={choseFile} className={classes.image_btn} />
+            ) : (
+                <IconButton onClick={choseFile} className={classes.image_btn}>
+                    <EditIcon />
+                </IconButton>
+            )}
             {fileName && <div className={classes.image_name}>File name: {fileName}</div>}
             <Image
                 src={filePath}
