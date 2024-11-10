@@ -3,8 +3,8 @@ export enum Page {
     LogIn = '/login',
     Cars = '/cars',
     EditCar = '/car/edit/[id]',
-    CreateCar = '/car/create',
+    AddCar = '/car/add',
     Trips = '/trips',
     EditTrip = '/trip/edit/[id]',
-    CreateTrip = '/trip/create',
+    AddTrip = '/trip/add',
 }

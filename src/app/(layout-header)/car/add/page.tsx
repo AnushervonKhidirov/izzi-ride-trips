@@ -6,9 +6,9 @@ import Form from '@common/form/form'
 
 import { createCarInputs } from '@constant/form'
 
-import classes from './create-car.module.css'
+import classes from './create-car-page.module.css'
 
-const CreateCarPage = () => {
+const AddCarPage = () => {
     async function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
@@ -26,4 +26,4 @@ const CreateCarPage = () => {
     )
 }
 
-export default CreateCarPage
+export default AddCarPage

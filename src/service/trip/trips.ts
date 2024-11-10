@@ -24,6 +24,6 @@ export default class Trips implements ITrips {
     }
 
     getCreateTripUrl() {
-        return Page.CreateTrip
+        return Page.AddTrip
     }
 }
