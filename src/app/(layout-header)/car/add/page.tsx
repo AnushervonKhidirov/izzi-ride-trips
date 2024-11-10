@@ -6,7 +6,7 @@ import Form from '@common/form/form'
 
 import { createCarInputs } from '@constant/form'
 
-import classes from './create-car-page.module.css'
+import classes from './add-car-page.module.css'
 
 const AddCarPage = () => {
     async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -15,12 +15,11 @@ const AddCarPage = () => {
         const formData = new FormData(e.currentTarget)
         const body = Object.fromEntries(formData)
 
-        console.log('body', body);
-        
+        console.log('body', body)
     }
 
     return (
-        <Section title="Create new car">
+        <Section title="Add Car">
             <Form inputs={createCarInputs} submitFunc={onSubmit} buttonText="Create car" className={classes.form} />
         </Section>
     )

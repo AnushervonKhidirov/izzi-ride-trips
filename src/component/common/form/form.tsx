@@ -4,6 +4,8 @@ import type { TextFieldProps } from '@mui/material'
 import type { TForm } from '@type/form'
 
 import { useRef, useState } from 'react'
+
+import Image from 'next/image'
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material'
 import { FormBtn, LinkButton } from '@common/button/button'
 import { PasswordInput } from '@common/input/input'
@@ -61,6 +63,7 @@ const Field: FC<TextFieldProps> = ({ name, type = 'text', label, required }) => 
 const FilePicker: FC<TextFieldProps> = ({ id, name, required }) => {
     const inputRef = useRef<HTMLInputElement>(null)
     const [fileName, setFileName] = useState<string | null>(null)
+    const [filePath, setFilePath] = useState<string | null>(null)
 
     function choseFile() {
         inputRef.current?.click()
@@ -68,13 +71,20 @@ const FilePicker: FC<TextFieldProps> = ({ id, name, required }) => {
 
     function getFileData(e: ChangeEvent<HTMLInputElement>) {
         const files = e.target.files
-        if (files) setFileName(files[0].name)
+        if (!files) return
+
+        console.log(files[0]);
+        
+
+        setFileName(files[0].name)
+        setFilePath(URL.createObjectURL(files[0]))
     }
 
     return (
         <div className={classes.file_field}>
             <LinkButton title="Add Car Image" onClick={choseFile} className={classes.file_btn} />
-            {fileName && <div>File name: {fileName}</div>}
+            {fileName && <div className={classes.file_name}>File name: {fileName}</div>}
+            {filePath && <Image src={filePath} width={100} height={100} alt="image" className={classes.image}></Image>}
 
             <input
                 id={id}
@@ -82,6 +92,7 @@ const FilePicker: FC<TextFieldProps> = ({ id, name, required }) => {
                 required={required}
                 ref={inputRef}
                 type="file"
+                accept="image"
                 onChange={e => getFileData(e)}
                 className={classes.file_input}
             />

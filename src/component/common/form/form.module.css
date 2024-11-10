@@ -16,9 +16,25 @@
 }
 
 .file_field {
-    display: flex;
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-template-areas: 'button file' 'image image';
     align-items: center;
     gap: 2rem;
+}
+
+.file_btn {
+    grid-area: button;
+}
+
+.file_name {
+    grid-area: file;
+}
+
+.image {
+    width: 35rem;
+    height: auto;
+    grid-area: image;
 }
 
 .file_input {
