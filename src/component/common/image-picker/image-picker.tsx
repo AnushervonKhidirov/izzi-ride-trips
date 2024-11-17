@@ -7,7 +7,7 @@ import { useRef, useState } from 'react'
 import Image from 'next/image'
 import EditIcon from '@mui/icons-material/Edit'
 import IconButton from '@mui/material/IconButton'
-import { LinkButton } from '@common/button/button'
+import { Button } from '@common/button/button'
 
 import classNames from 'classnames'
 import classes from './image-picker.module.css'
@@ -42,7 +42,7 @@ const ImagePicker: FC<AdditionalProps<TImagePicker>> = ({ id, name, placeholder,
             )}
         >
             {formPart ? (
-                <LinkButton title="Add Car Image" onClick={choseFile} className={classes.image_btn} />
+                <Button title="Add Car Image" onClick={choseFile} className={classes.image_btn} />
             ) : (
                 <IconButton onClick={choseFile} className={classes.image_btn}>
                     <EditIcon />

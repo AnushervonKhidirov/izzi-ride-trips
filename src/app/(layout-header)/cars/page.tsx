@@ -9,7 +9,7 @@ import Cars from '@service/car/cars'
 import Section from '@common/section/section'
 import CarList from '@component/car-list/car-list'
 
-import { LinkButton } from '@common/button/button'
+import { Button } from '@common/button/button'
 
 const CarsPage = () => {
     const cars = new Cars()
@@ -36,7 +36,7 @@ const CarsPage = () => {
     return (
         <Section title="Your cars">
             <CarList list={carList}>
-                <LinkButton title="Add New Car" href={cars.getCreateCarUrl()} sx={btnStyles} />
+                <Button title="Add New Car" href={cars.getCreateCarUrl()} sx={btnStyles} />
             </CarList>
         </Section>
     )

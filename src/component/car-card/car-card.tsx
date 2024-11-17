@@ -7,7 +7,7 @@ import Car from '@service/car/car'
 
 import Image, { StaticImageData } from 'next/image'
 import Card from '@common/card/card'
-import { LinkButton } from '@common/button/button'
+import { Button } from '@common/button/button'
 
 import classes from './car-card.module.css'
 
@@ -57,7 +57,7 @@ const Actions: FC<{ links: TNavigationData[] }> = ({ links }) => {
     return (
         <div className={classes.action_buttons}>
             {links.map(({ href, title }) => {
-                return <LinkButton href={href} title={title} className={classes.add_trip_btn} key={href} />
+                return <Button href={href} title={title} className={classes.add_trip_btn} key={href} />
             })}
         </div>
     )

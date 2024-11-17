@@ -8,7 +8,7 @@ import { createCarInputs } from '@constant/form'
 
 import classes from './create-car.module.css'
 
-const CreateTripPage = () => {
+const AddTripPage = () => {
     async function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
@@ -20,10 +20,10 @@ const CreateTripPage = () => {
     }
 
     return (
-        <Section title="Create new car">
-            <Form inputs={createCarInputs} submitFunc={onSubmit} buttonText="Create car" className={classes.form} />
+        <Section title="Add Trip">
+            <Form inputs={createCarInputs} submitFunc={onSubmit} buttonText="Create trip" className={classes.form} />
         </Section>
     )
 }
 
-export default CreateTripPage
+export default AddTripPage

@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 import Section from '@common/section/section'
 import TripList from '@component/trip-list/trip-list'
 import Trips from '@service/trip/trips'
-import { LinkButton } from '@common/button/button'
+import { Button } from '@common/button/button'
 
 const TripsPage = () => {
     const trips = new Trips()
@@ -34,7 +34,7 @@ const TripsPage = () => {
     return (
         <Section title="Your trips">
             <TripList list={carList}>
-                <LinkButton title="Add New Trip" href={trips.getCreateTripUrl()} sx={btnStyles} />
+                <Button title="Add New Trip" href={trips.getCreateTripUrl()} sx={btnStyles} />
             </TripList>
         </Section>
     )

@@ -2,7 +2,7 @@ import type { FC, HTMLAttributeAnchorTarget } from 'react'
 import type { TooltipProps } from '@mui/material'
 import type { AdditionalProps, TStyles } from '@type/common'
 
-import { CircularProgress, Button } from '@mui/material'
+import { CircularProgress, Button as MuiButton } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import Tooltip from '@common/tooltip/tooltip'
 
@@ -54,7 +54,7 @@ export const FormBtn: FC<TFromBtn> = ({ loading, title }) => {
     )
 }
 
-export const LinkButton: FC<AdditionalProps<TBtn>> = ({
+export const Button: FC<AdditionalProps<TBtn>> = ({
     href,
     target,
     title,
@@ -79,7 +79,7 @@ export const LinkButton: FC<AdditionalProps<TBtn>> = ({
 
     return tooltip ? (
         <Tooltip title={title} placement={tooltipPlacement}>
-            <Button
+            <MuiButton
                 href={href ?? ''}
                 target={target}
                 onClick={onClick}
@@ -89,10 +89,10 @@ export const LinkButton: FC<AdditionalProps<TBtn>> = ({
                 sx={buttonStyles}
             >
                 {children || title}
-            </Button>
+            </MuiButton>
         </Tooltip>
     ) : (
-        <Button
+        <MuiButton
             href={href ?? ''}
             target={target}
             type={type}
@@ -102,6 +102,6 @@ export const LinkButton: FC<AdditionalProps<TBtn>> = ({
             sx={buttonStyles}
         >
             {children || title}
-        </Button>
+        </MuiButton>
     )
 }

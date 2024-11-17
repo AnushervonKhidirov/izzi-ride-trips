@@ -5,7 +5,7 @@ import type { AdditionalProps } from '@type/common'
 
 import EditableField from '@common/editable-field/editable-field'
 import ImagePicker from '@common/image-picker/image-picker'
-import { LinkButton } from '@common/button/button'
+import { Button } from '@common/button/button'
 
 import carImage from '@public/images/car.png'
 
@@ -36,7 +36,7 @@ const EditableFieldList: FC<AdditionalProps<TEditableFieldsForm>> = ({ fields, o
                 )
             })}
 
-            <LinkButton title={submitText} type="submit" />
+            <Button title={submitText} type="submit" />
         </form>
     )
 }
