@@ -1,8 +1,7 @@
 .image_field.form_field {
     display: grid;
     grid-auto-columns: max-content;
-    grid-template-areas: '. image' 'file image' 'button image';
-    justify-content: space-between;
+    grid-template-areas: 'image .' 'image file' 'image button';
     align-items: center;
     gap: 0.5rem 2rem;
 }
@@ -13,6 +12,7 @@
 
 .image_btn {
     grid-area: button;
+    justify-self: start;
 }
 
 .editable_mode .image_btn {

@@ -1,9 +1,49 @@
 import type { FC, MouseEvent } from 'react'
-import type { OutlinedInputProps } from '@mui/material'
+import type { OutlinedInputProps, TextFieldProps } from '@mui/material'
 
 import { useState } from 'react'
-import { IconButton, InputAdornment, OutlinedInput } from '@mui/material'
+import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
+
+import ImagePicker from '@common/image-picker/image-picker'
+
+export const Input: FC<TextFieldProps> = ({ name, type = 'text', label, placeholder, required, className }) => {
+    const inputsWithoutLabel = ['date']
+
+    const InputVariants: { [key: string]: FC } = {
+        password: PasswordInput,
+        image: ImagePicker,
+        date: DateTimePicker,
+        default: OutlinedInput,
+    }
+
+    const Input: FC<TextFieldProps> = type in InputVariants ? InputVariants[type] : InputVariants.default
+
+    return (
+        <FormControl className={className}>
+            {!inputsWithoutLabel.includes(type) && (
+                <InputLabel size="small" htmlFor={name} style={{ fontSize: '1em' }}>
+                    {required ? `${label} *` : label}
+                </InputLabel>
+            )}
+            <Input
+                size="small"
+                id={name}
+                name={name}
+                type={type}
+                label={label}
+                required={required}
+                placeholder={placeholder}
+                style={{ fontSize: '1em' }}
+            />
+        </FormControl>
+    )
+}
 
 export const PasswordInput: FC<OutlinedInputProps> = ({ size, name, label, required, style }) => {
     const [showPassword, setShowPassword] = useState(false)
@@ -40,5 +80,25 @@ export const PasswordInput: FC<OutlinedInputProps> = ({ size, name, label, requi
                 </InputAdornment>
             }
         />
+    )
+}
+
+export const DateTimePicker: FC<OutlinedInputProps> = ({ size, name, label, required, style }) => {
+    return (
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={['MuiDateTimePicker']}>
+                <MuiDateTimePicker
+                    label={label}
+                    name={name}
+                    slotProps={{
+                        textField: {
+                            size,
+                            required,
+                            style,
+                        },
+                    }}
+                />
+            </DemoContainer>
+        </LocalizationProvider>
     )
 }

@@ -2,22 +2,7 @@ import type { TextFieldProps } from '@mui/material'
 
 import carImage from '@public/images/car.png'
 
-export const logInInputs: TextFieldProps[] = [
-    {
-        name: 'username',
-        type: 'text',
-        label: 'Login',
-        required: true,
-    },
-    {
-        name: 'password',
-        type: 'password',
-        label: 'Password',
-        required: true,
-    },
-]
-
-export const createCarInputs: TextFieldProps[] = [
+export const addCarInputs: TextFieldProps[] = [
     {
         name: 'image',
         type: 'image',

@@ -4,20 +4,21 @@ import type { TLogInData } from '@type/auth'
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Form from '@common/form/form'
+
+import { FormBtn } from '@common/button/button'
+import { Input } from '@common/input/input'
 
 import Auth from '@service/auth/auth'
 
-import { logInInputs } from '@constant/form'
-
+import { logInInputs } from './constants'
 import { addCookies } from '@helper/cookies'
 
 const LogIn = () => {
     const auth = new Auth()
-    const [loading, setLoading] = useState(false)
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
 
-    async function submitFunc(e: FormEvent<HTMLFormElement>) {
+    async function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         setLoading(true)
@@ -42,7 +43,21 @@ const LogIn = () => {
             <div className="form_overlay">
                 <h1>Log In</h1>
 
-                <Form submitFunc={submitFunc} inputs={logInInputs} loading={loading} buttonText="Log in"></Form>
+                <form onSubmit={onSubmit}>
+                    {logInInputs.map(input => {
+                        return (
+                            <Input
+                                name={input.name}
+                                type={input.type}
+                                label={input.label}
+                                required={input.required}
+                                key={input.name}
+                            />
+                        )
+                    })}
+
+                    <FormBtn loading={loading} title="Log in" />
+                </form>
             </div>
         </main>
     )

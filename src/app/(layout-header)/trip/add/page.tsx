@@ -1,27 +1,48 @@
 'use client'
-import { FormEvent } from 'react'
+import type { FormEvent } from 'react'
+
+import { useState } from 'react'
 
 import Section from '@common/section/section'
-import Form from '@common/form/form'
+import { FormBtn } from '@common/button/button'
+import { Input } from '@common/input/input'
 
-import { createCarInputs } from '@constant/form'
+import { addTripInputs } from './constants'
 
-import classes from './create-car.module.css'
+import classes from './add-trip-page.module.css'
 
 const AddTripPage = () => {
+    const [loading, setLoading] = useState(false)
+
     async function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
+
+        setLoading(true)
 
         const formData = new FormData(e.currentTarget)
         const body = Object.fromEntries(formData)
 
-        console.log('body', body);
-        
+        setLoading(false)
+        console.log('body', body)
     }
 
     return (
         <Section title="Add Trip">
-            <Form inputs={createCarInputs} submitFunc={onSubmit} buttonText="Create trip" className={classes.form} />
+            <form onSubmit={onSubmit} className={classes.form}>
+                {addTripInputs.map(input => {
+                    return (
+                        <Input
+                            name={input.name}
+                            type={input.type}
+                            label={input.label}
+                            placeholder={input.placeholder}
+                            required={input.required}
+                            key={input.name}
+                        />
+                    )
+                })}
+                <FormBtn title="Add Trip" loading={loading} />
+            </form>
         </Section>
     )
 }

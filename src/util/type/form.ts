@@ -1,13 +1,9 @@
 import type { FormEvent, ReactNode } from 'react'
-import type { TextFieldProps } from '@mui/material'
 
 export type TForm = {
-    inputs: TextFieldProps[]
-    submitFunc: (event: FormEvent<HTMLFormElement>) => void
-    loading?: boolean
-    buttonText?: string
+    onSubmit: (event: FormEvent<HTMLFormElement>) => void
+    children: ReactNode
     className?: string
-    children?: ReactNode
 }
 
 export type TEditableField = {
