@@ -1,6 +1,7 @@
 'use client'
 import type { FormEvent } from 'react'
 
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 import Section from '@common/section/section'
@@ -10,6 +11,8 @@ import { Input } from '@common/input/input'
 import { addTripInputs } from './constants'
 
 import classes from './add-trip-page.module.css'
+
+const LocationSearchInput = dynamic(() => import('@common/location-search-input/location-search-input'), { ssr: false })
 
 const AddTripPage = () => {
     const [loading, setLoading] = useState(false)
@@ -27,23 +30,25 @@ const AddTripPage = () => {
     }
 
     return (
-        <Section title="Add Trip">
-            <form onSubmit={onSubmit} className={classes.form}>
-                {addTripInputs.map(input => {
-                    return (
-                        <Input
-                            name={input.name}
-                            type={input.type}
-                            label={input.label}
-                            placeholder={input.placeholder}
-                            required={input.required}
-                            key={input.name}
-                        />
-                    )
-                })}
-                <FormBtn title="Add Trip" loading={loading} />
-            </form>
-        </Section>
+                <LocationSearchInput />
+        // <Section title="Add Trip">
+        //     <form onSubmit={onSubmit} className={classes.form}>
+        //         {addTripInputs.map(input => {
+        //             return (
+        //                 <Input
+        //                     name={input.name}
+        //                     type={input.type}
+        //                     label={input.label}
+        //                     placeholder={input.placeholder}
+        //                     required={input.required}
+        //                     key={input.name}
+        //                 />
+        //             )
+        //         })}
+
+        //         <FormBtn title="Add Trip" loading={loading} />
+        //     </form>
+        // </Section>
     )
 }
 

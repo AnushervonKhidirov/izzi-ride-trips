@@ -7,4 +7,5 @@ export enum Page {
     Trips = '/trips',
     EditTrip = '/trip/edit/[id]',
     AddTrip = '/trip/add',
+    Chat = '/chat',
 }

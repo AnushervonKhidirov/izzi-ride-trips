@@ -1,7 +1,9 @@
 import type { FormEvent, ReactNode } from 'react'
 
+export type TFormSubmit = (event: FormEvent<HTMLFormElement>) => void
+
 export type TForm = {
-    onSubmit: (event: FormEvent<HTMLFormElement>) => void
+    onSubmit: TFormSubmit
     children: ReactNode
     className?: string
 }

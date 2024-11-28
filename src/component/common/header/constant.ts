@@ -11,4 +11,8 @@ export const navigation: TNavigationData[] = [
         href: Page.Trips,
         title: 'Trips',
     },
+    {
+        href: Page.Chat,
+        title: 'Chat',
+    },
 ]
