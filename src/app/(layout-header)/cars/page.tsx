@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 import Cars from '@service/car/cars'
 
 import Section from '@common/section/section'
-import CarList from '@component/car-list/car-list'
+import CarList from '@component//car/car-list/car-list'
 
 import { Button } from '@common/button/button'
 

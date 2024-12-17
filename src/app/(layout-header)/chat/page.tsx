@@ -1,7 +1,7 @@
 'use client'
 import type { FormEvent } from 'react'
 
-import ChatInput from '@component/chart/chat-input/chat-input'
+import ChatInput from '@component/chat/chat-input/chat-input'
 
 const Chat = () => {
     function onSubmit(e: FormEvent<HTMLFormElement>) {

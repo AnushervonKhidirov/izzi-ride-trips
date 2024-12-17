@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import type { AdditionalProps, TStyles } from '@type/common'
 import type { TCar } from '@type/car'
 
-import CarCard from '@component/car-card/car-card'
+import CarCard from '../car-card/car-card'
 import Card from '@common/card/card'
 
 import classNames from 'classnames'

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 
 import Cars from '@service/car/cars'
-import CarEditableFields from '@component/car-editable-fields/car-editable-fields'
+import CarEditableFields from '@component/car/car-editable-fields/car-editable-fields'
 
 import Section from '@common/section/section'
 

@@ -5,7 +5,7 @@ import type { TStyles } from '@type/common'
 import { useState, useEffect } from 'react'
 
 import Section from '@common/section/section'
-import TripList from '@component/trip-list/trip-list'
+import TripList from '@component/trip/trip-list/trip-list'
 import Trips from '@service/trip/trips'
 import { Button } from '@common/button/button'
 
