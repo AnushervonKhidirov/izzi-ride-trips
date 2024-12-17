@@ -1,0 +1,5 @@
+.chat_input {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-area: 'input';
+}
