@@ -54,9 +54,9 @@ const Direction: FC<{ from: string; to: string }> = ({ from, to }) => {
 const About: FC<{ properties: TProperty[] }> = ({ properties }) => {
     return (
         <ul className={classes.about}>
-            {properties.map(({ key, name, value }) => {
+            {properties.map(({ name, value }) => {
                 return (
-                    <li key={key}>
+                    <li key={`${name}-${value}`}>
                         <span>{name}:</span>
                         <span>{value}</span>
                     </li>
