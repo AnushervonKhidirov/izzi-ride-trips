@@ -1,7 +1,7 @@
 import Chat from '@component/chat/chat-wrapper/chat'
 
-const ChatPage = () => {
+const ChatsPage = () => {
     return <Chat />
 }
 
-export default ChatPage
+export default ChatsPage
