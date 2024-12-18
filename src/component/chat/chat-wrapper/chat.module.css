@@ -1,0 +1,7 @@
+.chat {
+    display: grid;
+    height: 100%;
+    grid-template-areas: 'header' 'messages' 'input';
+    grid-template-rows: max-content 1fr max-content;
+    gap: 3em;
+}

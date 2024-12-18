@@ -1,0 +1,15 @@
+.message {
+    display: grid;
+    width: 70%;
+    max-width: 500px;
+    gap: 0.25em;
+}
+
+.message_date {
+    justify-self: self-end;
+    font-size: 0.75em;
+}
+
+.owner {
+    justify-self: self-end;
+}

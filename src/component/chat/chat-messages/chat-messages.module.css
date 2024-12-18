@@ -1,0 +1,6 @@
+.chat_messages {
+    display: grid;
+    grid-area: messages;
+    grid-auto-rows: max-content;
+    gap: 1em;
+}
