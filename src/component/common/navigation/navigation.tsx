@@ -26,7 +26,7 @@ const Navigation: FC<TNavigation> = ({ data, className }) => {
                     key={`header-nav-${title}`}
                     href={href}
                     sx={{ borderRadius: '0.25em' }}
-                    className={classNames(classes.navigation_item, { [classes.active]: pathname === href })}
+                    className={classNames(classes.navigation_item, { [classes.active]: pathname.includes(href) })}
                 >
                     {title}
                 </ListItemButton>
