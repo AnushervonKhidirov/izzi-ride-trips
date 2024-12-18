@@ -2,8 +2,8 @@ import type { FC } from 'react'
 import type { AdditionalProps, TStyles } from '@type/common'
 import type { TTrip } from '@type/trip'
 
-import TripCard from '@component/trip-card/trip-card'
 import Card from '@common/card/card'
+import TripCard from '../trip-card/trip-card'
 
 import classNames from 'classnames'
 import classes from './trip-list.module.css'
