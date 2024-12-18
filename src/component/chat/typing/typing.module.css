@@ -1,0 +1,31 @@
+.dot {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.25em);
+    transition: all 0.3s;
+}
+
+.dot:nth-child(1) {
+    animation: dotAnimation 1s ease-in infinite;
+}
+.dot:nth-child(2) {
+    animation: dotAnimation 1s calc(1s / 6) ease-in infinite;
+}
+.dot:nth-child(3) {
+    animation: dotAnimation 1s calc(1s / 6 * 2) ease-in infinite;
+}
+
+@keyframes dotAnimation {
+    0%,
+    80%,
+    100% {
+        opacity: 0;
+        transform: translateY(0.15em);
+    }
+
+    20%,
+    60% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
