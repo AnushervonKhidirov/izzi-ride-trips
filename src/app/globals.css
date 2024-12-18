@@ -33,7 +33,6 @@ header {
 
 main#log-in-page {
     display: grid;
-    grid-area: auto;
     justify-items: center;
     align-items: center;
 }
@@ -80,6 +79,17 @@ form {
     gap: 1em;
 }
 
+.button-without-styles {
+    background-color: inherit;
+    color: inherit;
+    text-align: inherit;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+}
+
 @media screen and (min-width: 1441px) {
     html {
         font-size: 0.5vw;
@@ -108,6 +118,11 @@ form {
     body:has(header) {
         grid-template-areas: 'header main';
         grid-template-columns: 13em 1fr;
+    }
+
+    body {
+        grid-template-areas: 'main';
+        grid-template-columns: 1fr;
         grid-template-rows: 1fr;
     }
 }
@@ -116,5 +131,29 @@ form {
     body:has(header) {
         grid-template-areas: 'header' 'main';
         grid-template-rows: max-content 1fr;
+    }
+
+    body {
+        grid-template-areas: 'main';
+        grid-template-rows: 1fr;
+    }
+}
+
+/* animations */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.25s ease-in forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
