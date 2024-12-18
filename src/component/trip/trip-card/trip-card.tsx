@@ -56,7 +56,7 @@ const About: FC<{ properties: TProperty[] }> = ({ properties }) => {
         <ul className={classes.about}>
             {properties.map(({ name, value }) => {
                 return (
-                    <li key={`${name}-${value}`}>
+                    <li key={name}>
                         <span>{name}:</span>
                         <span>{value}</span>
                     </li>

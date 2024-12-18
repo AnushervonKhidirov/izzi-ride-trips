@@ -40,27 +40,22 @@ export default class Trip implements ITrip {
     getProperties() {
         const propertyList: TProperty[] = [
             {
-                key: 'departure_time',
                 name: 'Departure Time',
                 value: this.getDepartureTime(),
             },
             {
-                key: 'arrival_time',
                 name: 'Arrival Time',
                 value: this.getArrivalTime(),
             },
             {
-                key: 'number_of_seats',
                 name: 'Number of Seats',
                 value: this.number_of_seats,
             },
             {
-                key: 'price',
                 name: 'Price',
                 value: this.getPrice(),
             },
             {
-                key: 'payment_method',
                 name: 'Payment Method',
                 value: this.payment_method,
             },
