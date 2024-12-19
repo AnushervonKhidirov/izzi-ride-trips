@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import type { AdditionalProps, TStyles } from '@type/common'
 import type { TTrip } from '@type/trip'
 
+import ScrolledContent from '@common/scrolled-content/scrolled-content'
 import Card from '@common/card/card'
 import TripCard from '../trip-card/trip-card'
 
@@ -18,7 +19,7 @@ const TripList: FC<AdditionalProps<{ list: TTrip[] }>> = ({ list, className, chi
     }
 
     return (
-        <ul className={classNames(classes.trip_list, className)}>
+        <ScrolledContent className={classNames(classes.trip_list, className)}>
             {list.map(trip => {
                 return <TripCard tripData={trip} key={trip.id} />
             })}
@@ -28,7 +29,7 @@ const TripList: FC<AdditionalProps<{ list: TTrip[] }>> = ({ list, className, chi
                     {children}
                 </Card>
             )}
-        </ul>
+        </ScrolledContent>
     )
 }
 
