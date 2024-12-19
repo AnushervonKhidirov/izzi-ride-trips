@@ -1,0 +1,15 @@
+.content {
+    position: relative;
+    overflow-y: scroll;
+    margin: -1em;
+    padding: 1em;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+}
+
+.content.show {
+    opacity: 1;
+    pointer-events: all;
+}
