@@ -1,3 +1,6 @@
-.headline {
-    margin-bottom: 3rem;
+.section {
+    display: grid;
+    height: 100%;
+    grid-template-rows: max-content 1fr;
+    gap: 3rem;
 }
