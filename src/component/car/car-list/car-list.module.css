@@ -1,6 +1,7 @@
 .car_list {
     display: grid;
     gap: 3rem;
+    grid-auto-rows: max-content;
 }
 
 @media screen and (min-width: 1440px) {

@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import type { AdditionalProps, TStyles } from '@type/common'
 import type { TCar } from '@type/car'
 
+import ScrolledContent from '@common/scrolled-content/scrolled-content'
 import CarCard from '../car-card/car-card'
 import Card from '@common/card/card'
 
@@ -18,7 +19,7 @@ const CarList: FC<AdditionalProps<{ list: TCar[] }>> = ({ list, className, child
     }
 
     return (
-        <ul className={classNames(classes.car_list, className)}>
+        <ScrolledContent className={classNames(classes.car_list, className)}>
             {list.map(car => {
                 return <CarCard carData={car} key={car.id} />
             })}
@@ -28,7 +29,7 @@ const CarList: FC<AdditionalProps<{ list: TCar[] }>> = ({ list, className, child
                     {children}
                 </Card>
             )}
-        </ul>
+        </ScrolledContent>
     )
 }
 
