@@ -1,6 +1,8 @@
 import type { TProperty } from '@type/common'
 import type { ITrip, TTrip } from '@type/trip'
 
+import { getDay, getTime } from '@helper/date'
+
 export default class Trip implements ITrip {
     readonly id: string
     readonly from: string
@@ -31,9 +33,9 @@ export default class Trip implements ITrip {
     getDate(timestamp: number) {
         const date = new Date(timestamp)
 
-        const day = date.toDateString().split(' ').slice(1).join(' ')
-        const time = `${date.toLocaleTimeString().split(':').slice(0, 2).join(':')} ${date.toLocaleTimeString().split(' ').at(-1)}`
-        
+        const day = getDay(date)
+        const time = getTime(date)
+
         return `${day} at ${time}`
     }
 
