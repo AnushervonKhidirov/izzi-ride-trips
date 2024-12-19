@@ -50,8 +50,10 @@ const ScrolledContent: FC<AdditionalProps<TScrolledContent>> = ({
     }, [children])
 
     return (
-        <div className={classNames(classes.content, { [classes.show]: showContent }, className)} ref={contentRef}>
-            {children}
+        <div className={classNames(classes.content, { [classes.show]: showContent })}>
+            <div className={className} ref={contentRef}>
+                {children}
+            </div>
         </div>
     )
 }
