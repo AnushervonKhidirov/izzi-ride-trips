@@ -1,7 +1,7 @@
 .chat_header {
     display: grid;
-    grid-area: header;
     grid-template-areas: 'name back' 'status back';
+    grid-area: header;
     justify-content: space-between;
 }
 
@@ -10,11 +10,15 @@
 }
 
 .status {
-    color: var(--primary);
     grid-area: status;
+    color: var(--primary);
     font-size: 0.75em;
 }
 
 .back_btn {
     grid-area: back;
+}
+
+.back_btn a {
+    display: block;
 }

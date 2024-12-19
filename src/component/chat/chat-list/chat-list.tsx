@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import type { AdditionalProps } from '@type/common'
+import type { TChatInfo } from '@type/chat'
 
 import Link from 'next/link'
 
@@ -15,15 +16,9 @@ import classNames from 'classnames'
 import classes from './chat-list.module.css'
 import { Page } from '@constant/links'
 
-type TChatItem = {
-    id: number
-    firstName: string
-    lastName: string
-}
-
 const ChatList = () => {
     return (
-        <Section title='Your chats'>
+        <Section title="Your chats">
             <ul className={classes.chat_list}>
                 <li>
                     <ChatItem id={44123} firstName="Denzel" lastName="Hawking 2">
@@ -47,17 +42,21 @@ const ChatList = () => {
     )
 }
 
-const ChatItem: FC<AdditionalProps<TChatItem>> = ({ id, firstName, lastName, className, children }) => {
+const ChatItem: FC<AdditionalProps<TChatInfo>> = ({ id, firstName, lastName, className, children }) => {
     const chatLink = Page.Chat.replace('[id]', id.toString())
 
     return (
-        <Tooltip title="Open chat" followCursor>
-            <Link href={chatLink} shallow className={classNames(classes.chat_item, className, ClassNames.button_without_styles)}>
+        <Tooltip title={`Chat with ${firstName}`} followCursor>
+            <Link
+                href={chatLink}
+                shallow
+                className={classNames(classes.chat_item, className, ClassNames.button_without_styles)}
+            >
                 <AccountCircle
                     className={classes.user_icon}
                     style={{ width: '100%', height: '100%', fill: Color.Secondary }}
                 />
-                
+
                 <div className={classes.user_name}>
                     {firstName} {lastName}
                 </div>

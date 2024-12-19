@@ -1,14 +1,15 @@
 'use client'
-import type { FormEvent } from 'react'
+import type { FC, FormEvent } from 'react'
 
-import ChatList from '../chat-list/chat-list'
-// import ChatHeader from '../chat-header/chat-header'
-// import ChatMessages from '../chat-messages/chat-messages'
-// import ChatInput from '../chat-input/chat-input'
+import type { TChatMessage, TChatInfo } from '@type/chat'
+
+import ChatHeader from '../chat-header/chat-header'
+import ChatMessages from '../chat-messages/chat-messages'
+import ChatInput from '../chat-input/chat-input'
 
 import classes from './chat.module.css'
 
-const Chat = () => {
+const Chat: FC<TChatInfo & { messages: TChatMessage[] }> = ({ id, firstName, lastName, messages }) => {
     function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
@@ -19,10 +20,9 @@ const Chat = () => {
 
     return (
         <div className={classes.chat}>
-            <ChatList />
-            {/* <ChatHeader firstName="Denzel" lastName="Hawking" />
-            <ChatMessages />
-            <ChatInput onSubmit={onSubmit} /> */}
+            <ChatHeader id={id} firstName={firstName} lastName={lastName} />
+            <ChatMessages messages={messages} />
+            <ChatInput onSubmit={onSubmit} />
         </div>
     )
 }

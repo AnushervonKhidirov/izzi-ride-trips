@@ -1,6 +1,6 @@
 .chat_messages {
     display: grid;
-    grid-area: messages;
     grid-auto-rows: max-content;
+    grid-area: messages;
     gap: 1em;
 }
