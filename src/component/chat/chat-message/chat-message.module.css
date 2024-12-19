@@ -1,7 +1,7 @@
 .message {
     display: grid;
     width: 70%;
-    max-width: 500px;
+    max-width: 35em;
     gap: 0.25em;
 }
 
