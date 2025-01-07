@@ -11,15 +11,15 @@ export function authMiddleware(nextMiddleware: NextMiddleware): NextMiddleware {
     const auth = new Auth()
 
     return async (request, event) => {
-        const cookieStore = cookies()
+        const cookieStore = await cookies()
 
-        const accessToken = cookieStore.get(Token.AccessKey)?.value
-        const refreshToken = cookieStore.get(Token.RefreshKey)?.value
+        const access_token = cookieStore.get(Token.Access)?.value
+        const refresh_token = cookieStore.get(Token.Refresh)?.value
 
-        if (accessToken && refreshToken) {
+        if (access_token && refresh_token) {
             const [user, err] = await auth.getUserWithRefresh({
-                accessToken: accessToken,
-                refreshToken: refreshToken,
+                access_token: access_token,
+                refresh_token: refresh_token,
             })
 
             if (!err) request.headers.set(Headers.User, JSON.stringify(user))
