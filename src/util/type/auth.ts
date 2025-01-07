@@ -1,15 +1,15 @@
 export type TUser = {
     id: number
     username: string
-    firstName: string
-    lastName: string
-    email: string
+    email?: string
     phone: string
+    first_name?: string
+    last_name?: string
 }
 
 export type TTokens = {
-    accessToken: string
-    refreshToken: string
+    access_token: string
+    refresh_token: string
 }
 
 export type TLogInData = {
