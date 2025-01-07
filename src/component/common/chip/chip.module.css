@@ -1,0 +1,11 @@
+.chip {
+    border-radius: 10em;
+    background-color: var(--green);
+    padding: 0.25em 0.75em;
+    font-size: 0.8em;
+    color: #fff;
+}
+
+.chip:not(.active) {
+    filter: grayscale(1);
+}
