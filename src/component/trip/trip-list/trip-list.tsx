@@ -20,15 +20,15 @@ const TripList: FC<AdditionalProps<{ list: TTrip[] }>> = ({ list, className, chi
 
     return (
         <ScrolledContent className={classNames(classes.trip_list, className)}>
-            {list.map(trip => {
-                return <TripCard tripData={trip} key={trip.id} />
-            })}
-
             {children && (
                 <Card className={classes.additional_card} sx={additionalCardStyles}>
                     {children}
                 </Card>
             )}
+            
+            {list.map(trip => {
+                return <TripCard tripData={trip} key={trip.id} />
+            })}
         </ScrolledContent>
     )
 }
