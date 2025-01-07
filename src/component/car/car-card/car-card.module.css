@@ -17,6 +17,13 @@
     grid-area: about;
 }
 
+.preferences {
+    grid-area: preferences;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1em;
+}
+
 .action_buttons {
     grid-area: btn;
     display: grid;
@@ -31,7 +38,7 @@
 
 @media screen and (min-width: 426px) {
     .car_card {
-        grid-template-areas: 'image' 'about' 'btn';
+        grid-template-areas: 'image' 'about' 'preferences' 'btn';
     }
 
     .image {
@@ -42,7 +49,7 @@
 
 @media screen and (max-width: 425px) {
     .car_card {
-        grid-template-areas: 'image about' 'image btn';
+        grid-template-areas: 'image about' 'image preferences' 'image btn';
         grid-template-columns: 1fr 1fr;
     }
 

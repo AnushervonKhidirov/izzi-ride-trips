@@ -20,15 +20,15 @@ const CarList: FC<AdditionalProps<{ list: TCar[] }>> = ({ list, className, child
 
     return (
         <ScrolledContent className={classNames(classes.car_list, className)}>
-            {list.map(car => {
-                return <CarCard carData={car} key={car.id} />
-            })}
-
             {children && (
                 <Card className={classes.additional_card} tag="li" sx={additionalCardStyles}>
                     {children}
                 </Card>
             )}
+
+            {list.map(car => {
+                return <CarCard carData={car} key={car.car_id} />
+            })}
         </ScrolledContent>
     )
 }

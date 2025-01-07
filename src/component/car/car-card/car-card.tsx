@@ -1,13 +1,15 @@
 import type { FC } from 'react'
 import type { TCar } from '@type/car'
-import type { TProperty } from '@type/common'
+import type { TChip, TProperty } from '@type/common'
 import type { TNavigationData } from '@type/navigation'
+import type { StaticImageData } from 'next/image'
 
 import Car from '@service/car/car'
 
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import Card from '@common/card/card'
 import { Button } from '@common/button/button'
+import ChipList from '@common/chip-list/chip-list'
 
 import classes from './car-card.module.css'
 
@@ -18,6 +20,7 @@ const CarCard: FC<{ carData: TCar }> = ({ carData }) => {
         <Card className={classes.car_card} tag="li">
             <CarImage image={car.getImageData()} title={car.getCarName()} />
             <About title={car.getCarName()} properties={car.getProperties()} />
+            <ChipList list={car.getPreferences()} />
             <Actions links={car.getActionButtons()} />
         </Card>
     )
