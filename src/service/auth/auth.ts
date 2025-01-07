@@ -35,19 +35,19 @@ export default class Auth {
         if (!token) return [null, new Error('token is not provided')]
 
         try {
-            const response = await axios.get(Endpoint.UserInfo, {
+            const response = await axios.get<TResponse<TUser>>(Endpoint.UserInfo, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             })
 
-            if (response.status !== 200) {
-                throw new Error("Can't get user, try to refresh token", {
+            if (response.status !== 200 || !response.data.data) {
+                throw new Error(response.data.message, {
                     cause: response,
                 })
             }
 
-            return [response.data, null]
+            return [response.data.data, null]
         } catch (err: any) {
             return [null, err]
         }
@@ -57,9 +57,9 @@ export default class Auth {
         if (!refresh_token) return [null, new Error('token is not provided')]
 
         try {
-            const response = await axios.post(
+            const response = await axios.post<TResponse<TTokens>>(
                 Endpoint.RefreshToken,
-                { refresh_token },
+                { token: refresh_token },
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -67,13 +67,13 @@ export default class Auth {
                 },
             )
 
-            if (response.status !== 200) {
+            if (response.status !== 200 || !response.data.data) {
                 throw new Error("Can't refresh token, pleas sign in again", {
                     cause: response,
                 })
             }
 
-            return [response.data, null]
+            return [response.data.data, null]
         } catch (err: any) {
             return [null, err]
         }
@@ -83,11 +83,7 @@ export default class Auth {
         const [user, userErr] = await this.getUser(tokens.access_token)
 
         if (userErr) {
-            if (
-                userErr.cause &&
-                userErr.cause.status === Number(Token.ExpiredCode) &&
-                userErr.cause.statusText === Token.ExpiredText
-            ) {
+            if (userErr.cause && userErr.cause.status === Number(Token.ExpiredCode)) {
                 const [updatedTokens, tokenErr] = await this.refreshTokens(tokens.refresh_token)
 
                 if (tokenErr) return [null, tokenErr]
