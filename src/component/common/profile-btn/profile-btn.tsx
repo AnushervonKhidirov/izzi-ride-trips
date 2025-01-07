@@ -11,7 +11,16 @@ import { Page } from '@constant/links'
 import { Color } from '@constant/colors'
 import classes from './profile-btn.module.css'
 
-const ProfileButton: FC<AdditionalProps<TUser>> = ({ firstName, lastName, className }) => {
+const ProfileButton: FC<AdditionalProps<TUser>> = ({ username, first_name, last_name, className }) => {
+    const name = getName()
+
+    function getName() {
+        if (first_name && last_name) return `${first_name} ${first_name}`
+        if (first_name && !last_name) return first_name
+        if (last_name && !first_name) return last_name
+        return username
+    }
+
     return (
         <Tooltip title="Profile" followCursor>
             <Link href={Page.Profile} className={classNames(classes.profile_btn, className)}>
@@ -19,9 +28,7 @@ const ProfileButton: FC<AdditionalProps<TUser>> = ({ firstName, lastName, classN
                     className={classes.profile_icon}
                     style={{ width: '100%', height: '100%', fill: Color.Secondary }}
                 />
-                <div className={classes.user_name}>
-                    {firstName} {lastName}
-                </div>
+                <div className={classes.user_name}>{name}</div>
             </Link>
         </Tooltip>
     )
