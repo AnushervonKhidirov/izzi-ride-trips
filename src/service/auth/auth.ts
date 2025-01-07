@@ -1,12 +1,12 @@
 import type { ErrorCustom } from '@type/error'
-import type { TUser, TTokens, TLogInData } from '@type/auth'
+import type { TUser, TTokens, TLogInData, TResponse } from '@type/auth'
 
 import axios from 'axios'
 
 import { Endpoint, Token } from '@constant/request'
 
 type RequestFunc<T, U> = (data: T) => Promise<[null, ErrorCustom<Response>] | [U, null]>
-type TLogInResponse = TUser & TTokens
+type TLogInResponse = TResponse<TTokens>
 
 export default class Auth {
     logIn: RequestFunc<TLogInData, TTokens> = async body => {
@@ -17,15 +17,15 @@ export default class Auth {
                 },
             })
 
-            if (response.status !== 200) {
-                throw new Error('Cant sign in, check entered data or join', {
+            if (response.status !== 200 || !response.data.data) {
+                throw new Error(response.data.message, {
                     cause: response,
                 })
             }
 
-            const { accessToken, refreshToken }: TTokens = response.data
+            const { access_token, refresh_token }: TTokens = response.data.data
 
-            return [{ accessToken, refreshToken }, null]
+            return [{ access_token, refresh_token }, null]
         } catch (err: any) {
             return [null, err]
         }
@@ -35,7 +35,7 @@ export default class Auth {
         if (!token) return [null, new Error('token is not provided')]
 
         try {
-            const response = await axios.get(Endpoint.User, {
+            const response = await axios.get(Endpoint.UserInfo, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -53,13 +53,13 @@ export default class Auth {
         }
     }
 
-    refreshTokens: RequestFunc<string | undefined, TTokens> = async refreshToken => {
-        if (!refreshToken) return [null, new Error('token is not provided')]
+    refreshTokens: RequestFunc<string | undefined, TTokens> = async refresh_token => {
+        if (!refresh_token) return [null, new Error('token is not provided')]
 
         try {
             const response = await axios.post(
                 Endpoint.RefreshToken,
-                { refreshToken },
+                { refresh_token },
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ export default class Auth {
     }
 
     getUserWithRefresh: RequestFunc<TTokens, TUser> = async tokens => {
-        const [user, userErr] = await this.getUser(tokens.accessToken)
+        const [user, userErr] = await this.getUser(tokens.access_token)
 
         if (userErr) {
             if (
@@ -88,11 +88,11 @@ export default class Auth {
                 userErr.cause.status === Number(Token.ExpiredCode) &&
                 userErr.cause.statusText === Token.ExpiredText
             ) {
-                const [updatedTokens, tokenErr] = await this.refreshTokens(tokens.refreshToken)
+                const [updatedTokens, tokenErr] = await this.refreshTokens(tokens.refresh_token)
 
                 if (tokenErr) return [null, tokenErr]
 
-                const [user, err] = await this.getUser(updatedTokens.accessToken)
+                const [user, err] = await this.getUser(updatedTokens.access_token)
 
                 if (err) return [null, err]
                 return [user, null]
