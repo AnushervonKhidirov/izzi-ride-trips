@@ -1,16 +1,20 @@
+const endpoint = 'http://194.135.105.117:9091/api/v1'
+
 export enum Endpoint {
-    LogIn = 'https://dummyjson.com/auth/login',
-    User = 'https://dummyjson.com/auth/me',
-    RefreshToken = 'https://dummyjson.com/auth/refresh',
-    Car = 'https://dummyjson.com/c/25ae-0d7a-45af-b8c6',
-    Cars = 'https://dummyjson.com/c/2c8c-87ea-4726-a784',
-    Trip = 'https://dummyjson.com/c/d1d2-0b71-4f9c-9fad',
-    Trips = 'https://dummyjson.com/c/783b-3927-4b48-9add',
+    LogIn = `${endpoint}/sign`,
+    UserInfo = `${endpoint}/user/info`,
+    Roles = `${endpoint}/user/roles`,
+    RefreshToken = `${endpoint}/refresh-token`,
+    AddCar = `${endpoint}/user/car`,
+    Car = `${endpoint}/`,
+    Cars = `${endpoint}/user/cars`,
+    Trip = `${endpoint}/`,
+    Trips = `${endpoint}/`,
 }
 
 export enum Token {
-    AccessKey = 'accessToken',
-    RefreshKey = 'refreshToken',
-    ExpiredText = 'Unauthorized',
-    ExpiredCode = '401',
+    Access = 'access_token',
+    Refresh = 'refresh_token',
+    ExpiredText = 'cannot parse token',
+    ExpiredCode = '68',
 }
