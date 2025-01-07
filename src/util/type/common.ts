@@ -10,4 +10,9 @@ export type TProperty = {
     value: string | number
 }
 
+export type TChip = {
+    name: string
+    value: boolean
+}
+
 export type TStyles = HTMLAttributes<HTMLElement>['style']

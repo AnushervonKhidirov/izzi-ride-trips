@@ -7,8 +7,8 @@ import type { TEditableField } from './form'
 // Cars
 export interface ICars {
     getCreateCarUrl: () => string
-    fetchCars: () => Promise<[TCar[], null] | [null, ErrorCustom<Response>]>
-    fetchCar: (id: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
+    fetchCars: (token: string) => Promise<[TCar[], null] | [null, ErrorCustom<Response>]>
+    fetchCar: (id: string, token: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
 }
 
 // Car
@@ -23,15 +23,23 @@ export interface ICar extends TCar {
 }
 
 export type TCar = Readonly<{
-    id: string
-    brand: string
-    model: string | undefined
-    type: TCarType
-    seats: number
-    plate: string
-    year: number
-    image: string | undefined
+    car_id: number
+    number_of_seats: number
+    model: string
+    manufacturer: string
+    auto_number: string
+    color: string
+    year: string | number
+    preferences: TCarPreferences
+    image?: string
 }>
+
+export type TCarPreferences = {
+    smoking: boolean
+    child_car_seat: boolean
+    animals: boolean
+    luggage: boolean
+}
 
 export type TCarType =
     | 'Off-road vehicles'
