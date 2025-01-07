@@ -16,3 +16,10 @@ export type TLogInData = {
     username: string
     password: string
 }
+
+export type TResponse<T> = {
+    code: number
+    show_custom_message: boolean
+    message: string
+    data?: T
+}
