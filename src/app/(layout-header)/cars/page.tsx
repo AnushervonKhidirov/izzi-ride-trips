@@ -17,7 +17,7 @@ const CarsPage = () => {
     const cars = new Cars()
     const cookie = useCookies()
     const token = cookie.get(Token.Access)
-    
+
     const [carList, setCarList] = useState<TCar[]>([])
 
     async function getData(token: string) {
