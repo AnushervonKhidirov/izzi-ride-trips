@@ -1,5 +1,5 @@
-import type { TCar, ICar, TCarType } from '@type/car'
-import type { TProperty } from '@type/common'
+import type { TCar, ICar, TCarPreferences } from '@type/car'
+import type { TChip, TProperty } from '@type/common'
 import type { TEditableField } from '@type/form'
 
 import { linkGenerator } from '@helper/link-generator'
@@ -7,32 +7,34 @@ import { Page } from '@constant/links'
 import carImage from '@public/images/car.png'
 
 export default class Car implements ICar {
-    readonly id: string
-    readonly brand: string
-    readonly model: string | undefined
+    readonly car_id: number
+    readonly manufacturer: string
+    readonly model: string
     readonly image: string | undefined
-    readonly seats: number
-    readonly type: TCarType
-    readonly plate: string
-    readonly year: number
+    readonly number_of_seats: number
+    readonly auto_number: string
+    readonly year: string | number
+    readonly color: string
+    readonly preferences: TCarPreferences
 
     constructor(car: TCar) {
-        this.id = car.id
-        this.brand = car.brand
+        this.car_id = car.car_id
+        this.manufacturer = car.manufacturer
         this.model = car.model
         this.image = car.image
-        this.seats = car.seats
-        this.type = car.type
-        this.plate = car.plate
+        this.number_of_seats = car.number_of_seats
+        this.color = car.color
+        this.auto_number = car.auto_number
         this.year = car.year
+        this.preferences = car.preferences
     }
 
     getAddTripUrl() {
-        return linkGenerator(Page.AddTrip, { car: this.id })
+        return linkGenerator(Page.AddTrip, { car: this.car_id })
     }
 
     getEditCarUrl() {
-        return Page.EditCar.replace('[id]', this.id)
+        return Page.EditCar.replace('[id]', this.car_id.toString())
     }
 
     getActionButtons() {
@@ -54,26 +56,49 @@ export default class Car implements ICar {
     }
 
     getCarName() {
-        return this.model ? `${this.brand} ${this.model}` : this.brand
+        return `${this.manufacturer} ${this.model}`
+    }
+
+    getPreferences() {
+        const preferences: TChip[] = [
+            {
+                name: 'Smoking',
+                value: this.preferences.smoking,
+            },
+            {
+                name: 'Animals',
+                value: this.preferences.animals,
+            },
+            {
+                name: 'Luggage',
+                value: this.preferences.luggage,
+            },
+            {
+                name: 'Child car seat',
+                value: this.preferences.child_car_seat,
+            },
+        ]
+
+        return preferences
     }
 
     getProperties() {
         const properties: TProperty[] = [
-            {
-                name: 'Type',
-                value: this.type,
-            },
             {
                 name: 'Year',
                 value: this.year,
             },
             {
                 name: 'Seats',
-                value: this.seats,
+                value: this.number_of_seats,
             },
             {
                 name: 'Plate',
-                value: this.plate,
+                value: this.auto_number,
+            },
+            {
+                name: 'Color',
+                value: this.color,
             },
         ]
 
@@ -85,13 +110,7 @@ export default class Car implements ICar {
             {
                 title: 'Model',
                 name: 'model',
-                value: this.model ?? '',
-                editable: true,
-            },
-            {
-                title: 'Type',
-                name: 'type',
-                value: this.type,
+                value: this.model,
                 editable: true,
             },
             {
@@ -103,13 +122,19 @@ export default class Car implements ICar {
             {
                 title: 'Seats',
                 name: 'seats',
-                value: this.seats,
+                value: this.number_of_seats,
+                editable: true,
+            },
+            {
+                title: 'Color',
+                name: 'color',
+                value: this.color,
                 editable: true,
             },
             {
                 title: 'Plate',
                 name: 'plate',
-                value: this.plate,
+                value: this.auto_number,
                 editable: true,
             },
         ]

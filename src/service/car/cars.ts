@@ -1,5 +1,6 @@
 import type { ICars, TCar } from '@type/car'
 import type { ErrorCustom } from '@type/error'
+import type { TResponse } from '@type/auth'
 
 import axios from 'axios'
 
@@ -11,36 +12,44 @@ export default class Cars implements ICars {
         return Page.AddCar
     }
 
-    async fetchCar(id: string): Promise<[TCar, null] | [null, ErrorCustom<Response>]> {
+    async fetchCar(id: string, token: string): Promise<[TCar, null] | [null, ErrorCustom<Response>]> {
         try {
             // const endpoint = Endpoint.Car.replace('[id]', id)
             const endpoint = Endpoint.Car
 
-            const response = await axios.get<TCar>(endpoint)
+            const response = await axios.get<TResponse<TCar>>(endpoint, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
 
-            if (response.status !== 200) {
-                throw new Error("Can't get car, Try again later", {
+            if (response.status !== 200 || !response.data.data) {
+                throw new Error(response.data.message, {
                     cause: response,
                 })
             }
 
-            return [response.data, null]
+            return [response.data.data, null]
         } catch (err: any) {
             return [null, err]
         }
     }
 
-    async fetchCars(): Promise<[TCar[], null] | [null, ErrorCustom<Response>]> {
+    async fetchCars(token: string): Promise<[TCar[], null] | [null, ErrorCustom<Response>]> {
         try {
-            const response = await axios.get<TCar[]>(Endpoint.Cars)
+            const response = await axios.get<TResponse<TCar[]>>(Endpoint.Cars, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
 
-            if (response.status !== 200) {
-                throw new Error("Can't get cars, Try again later", {
+            if (response.status !== 200 || !response.data.data) {
+                throw new Error(response.data.message, {
                     cause: response,
                 })
             }
 
-            return [response.data, null]
+            return [response.data.data, null]
         } catch (err: any) {
             return [null, err]
         }
