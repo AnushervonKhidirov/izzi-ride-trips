@@ -15,6 +15,6 @@ export enum Endpoint {
 export enum Token {
     Access = 'access_token',
     Refresh = 'refresh_token',
-    ExpiredText = 'cannot parse token',
-    ExpiredCode = '68',
+    ExpiredText = 'Unauthorized',
+    ExpiredCode = '401',
 }
