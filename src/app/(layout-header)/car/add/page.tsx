@@ -61,7 +61,6 @@ const AddCarPage = () => {
     async function autocompleteEventHandler(e: CustomEventInit<TAutocompleteOption>) {
         if (!token || !e.detail) return
 
-        // const availableModels = await cars.getModelsByManufacturerId(e.detail.id, token)
         const allModels = carFormData.find(data => data.name === 'model')
         const manufacturerId = e.detail.id
 
