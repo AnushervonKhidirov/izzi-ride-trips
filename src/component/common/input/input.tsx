@@ -129,7 +129,7 @@ export const SelectAutocomplete: FC<TextFieldProps & { options: TAutocompleteOpt
     function triggerFormEvent(value: TAutocompleteOption) {
         if (!autocompleteRef.current) return
 
-        const autocompleteEvent = new CustomEvent(Event.Autocomplete, { detail: { value } })
+        const autocompleteEvent = new CustomEvent<TAutocompleteOption>(Event.Autocomplete, { detail: value })
         const formElement = autocompleteRef.current.parentElement
         formElement?.dispatchEvent(autocompleteEvent)
     }
