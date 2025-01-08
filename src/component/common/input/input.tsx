@@ -1,6 +1,6 @@
 import type { FC, MouseEvent } from 'react'
 import type { OutlinedInputProps, TextFieldProps } from '@mui/material'
-import type { TFormElement } from '@type/form'
+import type { TAutocompleteOption, TFormElement } from '@type/form'
 
 import { useState } from 'react'
 import {
@@ -135,9 +135,4 @@ export const SelectAutocomplete: FC<TextFieldProps & { options: TAutocompleteOpt
             />
         </FormControl>
     )
-}
-
-export type TAutocompleteOption = {
-    id: number
-    label: string
 }

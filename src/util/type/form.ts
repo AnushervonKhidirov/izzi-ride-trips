@@ -1,6 +1,5 @@
 import type { FormEvent, ReactNode } from 'react'
 import type { TextFieldProps } from '@mui/material'
-import type { TAutocompleteOption } from '@common/input/input'
 
 export type TFormSubmit = (event: FormEvent<HTMLFormElement>) => void
 
@@ -20,4 +19,9 @@ export type TEditableField = {
 
 export type TFormElement = TextFieldProps & {
     options?: TAutocompleteOption[]
+}
+
+export type TAutocompleteOption = {
+    id: number
+    label: string
 }
