@@ -2,7 +2,7 @@ import type { StaticImageData } from 'next/image'
 import type { TProperty } from './common'
 import type { ErrorCustom } from './error'
 import type { TNavigationData } from './navigation'
-import type { TEditableField } from './form'
+import type { TEditableField, TFormElement } from './form'
 
 // Cars
 export interface ICars {
@@ -11,6 +11,7 @@ export interface ICars {
     fetchCar: (id: string, token: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
     getManufacturers: (token: string) => Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]>
     getModels: (token: string) => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
+    prepareFormData: (token: string) => Promise<TFormElement[]>
 }
 
 // Car
