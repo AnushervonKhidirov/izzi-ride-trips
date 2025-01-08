@@ -14,14 +14,14 @@ export default class Cars implements ICars {
 
     async fetchCar(id: string, token: string): Promise<[TCar, null] | [null, ErrorCustom<Response>]> {
         try {
-            // const endpoint = Endpoint.Car.replace('[id]', id)
-            const endpoint = Endpoint.Car
-
-            const response = await axios.get<TResponse<TCar>>(endpoint, {
+            const response = await axios.get<TResponse<TCar[]>>(Endpoint.Cars, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             })
+
+            console.log('response', response.data)
+            
 
             if (response.status !== 200 || !response.data.data) {
                 throw new Error(response.data.message, {
@@ -29,7 +29,11 @@ export default class Cars implements ICars {
                 })
             }
 
-            return [response.data.data, null]
+            const car = response.data.data.find(car => car.car_id === parseInt(id))
+
+            if (!car) throw new Error('There is no such car')
+
+            return [car, null]
         } catch (err: any) {
             return [null, err]
         }
