@@ -23,7 +23,16 @@ import ImagePicker from '@common/image-picker/image-picker'
 
 import { Event } from '@constant/event'
 
-export const Input: FC<TFormElement> = ({ name, type = 'text', options, defaultValue, label, placeholder, required, className }) => {
+export const Input: FC<TFormElement> = ({
+    name,
+    type = 'text',
+    options,
+    defaultValue,
+    label,
+    placeholder,
+    required,
+    className,
+}) => {
     const inputsWithoutLabel = ['date']
 
     const InputVariants: { [key: string]: FC<any> } = {
@@ -33,7 +42,16 @@ export const Input: FC<TFormElement> = ({ name, type = 'text', options, defaultV
         default: OutlinedInput,
     }
 
-    if (options) return <SelectAutocomplete name={name} label={label} required={required} options={options} />
+    if (options)
+        return (
+            <SelectAutocomplete
+                name={name}
+                label={label}
+                defaultValue={defaultValue}
+                required={required}
+                options={options}
+            />
+        )
 
     const Input: FC<TFormElement> = type in InputVariants ? InputVariants[type] : InputVariants.default
 
@@ -143,7 +161,8 @@ export const SelectAutocomplete: FC<TFormElement> = ({
             ref={autocompleteRef}
             className={className}
             sx={{ '& * ': { fontSize: '1em !important' } }}
-            renderInput={params => <TextField {...params} name={name} value={defaultValue} required={required} label={label} />}
+            defaultValue={typeof defaultValue === 'object' ? defaultValue : undefined}
+            renderInput={params => <TextField {...params} name={name} required={required} label={label} />}
             renderOption={(props, option) => {
                 return (
                     <li style={{ fontSize: '1.25em', padding: '0.5em 1em' }} {...props} key={option.id}>

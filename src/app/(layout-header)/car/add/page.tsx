@@ -109,6 +109,7 @@ const AddCarPage = () => {
                                 placeholder={input.placeholder}
                                 required={input.required}
                                 options={input.options}
+                                defaultValue={input.defaultValue}
                                 key={input.name}
                             />
                         )
