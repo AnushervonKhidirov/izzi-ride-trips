@@ -1,8 +1,17 @@
 import type { FC, MouseEvent } from 'react'
 import type { OutlinedInputProps, TextFieldProps } from '@mui/material'
+import type { TFormElement } from '@type/form'
 
 import { useState } from 'react'
-import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material'
+import {
+    FormControl,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    OutlinedInput,
+    Autocomplete,
+    TextField,
+} from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
@@ -12,14 +21,18 @@ import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTim
 
 import ImagePicker from '@common/image-picker/image-picker'
 
-export const Input: FC<TextFieldProps> = ({ name, type = 'text', label, placeholder, required, className }) => {
+export const Input: FC<TFormElement> = ({ name, type = 'text', options, label, placeholder, required, className }) => {
     const inputsWithoutLabel = ['date']
 
-    const InputVariants: { [key: string]: FC } = {
+    const InputVariants: { [key: string]: FC<any> } = {
         password: PasswordInput,
         image: ImagePicker,
         date: DateTimePicker,
         default: OutlinedInput,
+    }
+
+    if (options) {
+        return <SelectAutocomplete name={name} label={label} required={required} options={options}   />
     }
 
     const Input: FC<TextFieldProps> = type in InputVariants ? InputVariants[type] : InputVariants.default
@@ -101,4 +114,30 @@ export const DateTimePicker: FC<OutlinedInputProps> = ({ size, name, label, requ
             </DemoContainer>
         </LocalizationProvider>
     )
+}
+
+export const SelectAutocomplete: FC<TextFieldProps & { options: TAutocompleteOption[] }> = ({
+    name,
+    label,
+    options,
+    required,
+    className,
+}) => {
+    return (
+        <FormControl>
+            <Autocomplete
+                size="small"
+                id={name}
+                options={options}
+                className={className}
+                sx={{ '& * ': { fontSize: '1em !important' } }}
+                renderInput={params => <TextField {...params} required={required} label={label} />}
+            />
+        </FormControl>
+    )
+}
+
+export type TAutocompleteOption = {
+    id: number
+    label: string
 }
