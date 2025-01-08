@@ -20,9 +20,6 @@ export default class Cars implements ICars {
                 },
             })
 
-            console.log('response', response.data)
-            
-
             if (response.status !== 200 || !response.data.data) {
                 throw new Error(response.data.message, {
                     cause: response,
