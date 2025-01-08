@@ -2,7 +2,7 @@ import type { StaticImageData } from 'next/image'
 import type { TProperty } from './common'
 import type { ErrorCustom } from './error'
 import type { TNavigationData } from './navigation'
-import type { TEditableField, TFormElement } from './form'
+import type { TAutocompleteOption, TEditableField, TFormElement } from './form'
 
 // Cars
 export interface ICars {
@@ -54,6 +54,10 @@ export type TCarModel = {
     id: number
     manufacturer_id: number
     name: string
+}
+
+export type TCarModelOption = TAutocompleteOption & {
+    manufacturer_id: number
 }
 
 export type TCarType =

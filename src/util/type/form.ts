@@ -19,10 +19,17 @@ export type TEditableField = {
 
 export type TFormElement = TextFieldProps & {
     options?: TAutocompleteOption[]
-    defaultValue?: string | number | TAutocompleteOption
+    defaultValue?: TDefaultValue
 }
 
 export type TAutocompleteOption = {
     id: number
     label: string
 }
+
+export type TDefaultFormElementData = {
+    name: string
+    value: TDefaultValue
+}
+
+export type TDefaultValue = string | number | TAutocompleteOption
