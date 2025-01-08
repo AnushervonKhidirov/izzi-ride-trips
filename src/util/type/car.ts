@@ -11,7 +11,7 @@ export interface ICars {
     fetchCar: (id: string, token: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
     getManufacturers: (token: string) => Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]>
     getModels: (token: string) => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
-    prepareFormData: (token: string) => Promise<TFormElement[]>
+    addCarFormData: (token: string) => Promise<TFormElement[]>
 }
 
 // Car
