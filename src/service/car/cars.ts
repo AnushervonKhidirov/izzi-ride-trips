@@ -16,19 +16,6 @@ export default class Cars implements ICars {
         return Page.AddCar
     }
 
-    async getModelsByManufacturerId(id: number, token: string): Promise<TAutocompleteOption[]> {
-        const [modelList] = await this.getModels(token)
-
-        if (!modelList) return []
-
-        return modelList
-            .filter(model => model.manufacturer_id === id)
-            .map<TAutocompleteOption>(manufacturer => ({
-                id: manufacturer.id,
-                label: manufacturer.name,
-            }))
-    }
-
     async addCarFormData(token: string): Promise<TFormElement[]> {
         const [manufacturerList] = await this.getManufacturers(token)
         const [modelList] = await this.getModels(token)
