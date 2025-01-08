@@ -1,8 +1,8 @@
-import type { FC, MouseEvent } from 'react'
+import type { FC, FormEvent, MouseEvent } from 'react'
 import type { OutlinedInputProps, TextFieldProps } from '@mui/material'
 import type { TAutocompleteOption, TFormElement } from '@type/form'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
     FormControl,
     IconButton,
@@ -11,6 +11,7 @@ import {
     OutlinedInput,
     Autocomplete,
     TextField,
+    Box,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
@@ -20,6 +21,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 
 import ImagePicker from '@common/image-picker/image-picker'
+
+import { Event } from '@constant/event'
 
 export const Input: FC<TFormElement> = ({ name, type = 'text', options, label, placeholder, required, className }) => {
     const inputsWithoutLabel = ['date']
@@ -121,14 +124,35 @@ export const SelectAutocomplete: FC<TextFieldProps & { options: TAutocompleteOpt
     required,
     className,
 }) => {
+    const autocompleteRef = useRef<HTMLElement>(null)
+
+    function triggerFormEvent(value: TAutocompleteOption) {
+        if (!autocompleteRef.current) return
+
+        const autocompleteEvent = new CustomEvent(Event.Autocomplete, { detail: { value } })
+        const formElement = autocompleteRef.current.parentElement
+        formElement?.dispatchEvent(autocompleteEvent)
+    }
+
     return (
         <Autocomplete
             size="small"
             id={name}
             options={options}
+            ref={autocompleteRef}
             className={className}
             sx={{ '& * ': { fontSize: '1em !important' } }}
-            renderInput={params => <TextField {...params} required={required} label={label} />}
+            renderInput={params => <TextField {...params} name={name} required={required} label={label} />}
+            renderOption={(props, option) => {
+                return (
+                    <li style={{ fontSize: '1.25em', padding: '0.5em 1em' }} {...props} key={option.id}>
+                        {option.label}
+                    </li>
+                )
+            }}
+            onChange={(_, value) => {
+                if (value) triggerFormEvent(value)
+            }}
         />
     )
 }
