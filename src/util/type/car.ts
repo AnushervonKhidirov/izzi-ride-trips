@@ -41,6 +41,18 @@ export type TCarPreferences = {
     luggage: boolean
 }
 
+export type TCarManufacturer = {
+    id: number
+    country: string
+    name: string
+}
+
+export type TCarModel = {
+    id: number
+    manufacturer_id: number
+    name: string
+}
+
 export type TCarType =
     | 'Off-road vehicles'
     | 'Minivans'

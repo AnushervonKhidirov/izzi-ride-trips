@@ -1,4 +1,6 @@
 import type { FormEvent, ReactNode } from 'react'
+import type { TextFieldProps } from '@mui/material'
+import type { TAutocompleteOption } from '@common/input/input'
 
 export type TFormSubmit = (event: FormEvent<HTMLFormElement>) => void
 
@@ -14,4 +16,8 @@ export type TEditableField = {
     value: string | number
     editing?: boolean
     editable?: boolean
+}
+
+export type TFormElement = TextFieldProps & {
+    options?: TAutocompleteOption[]
 }
