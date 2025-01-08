@@ -31,9 +31,7 @@ export const Input: FC<TFormElement> = ({ name, type = 'text', options, label, p
         default: OutlinedInput,
     }
 
-    if (options) {
-        return <SelectAutocomplete name={name} label={label} required={required} options={options}   />
-    }
+    if (options) return <SelectAutocomplete name={name} label={label} required={required} options={options} />
 
     const Input: FC<TextFieldProps> = type in InputVariants ? InputVariants[type] : InputVariants.default
 
@@ -124,15 +122,13 @@ export const SelectAutocomplete: FC<TextFieldProps & { options: TAutocompleteOpt
     className,
 }) => {
     return (
-        <FormControl>
-            <Autocomplete
-                size="small"
-                id={name}
-                options={options}
-                className={className}
-                sx={{ '& * ': { fontSize: '1em !important' } }}
-                renderInput={params => <TextField {...params} required={required} label={label} />}
-            />
-        </FormControl>
+        <Autocomplete
+            size="small"
+            id={name}
+            options={options}
+            className={className}
+            sx={{ '& * ': { fontSize: '1em !important' } }}
+            renderInput={params => <TextField {...params} required={required} label={label} />}
+        />
     )
 }
