@@ -19,6 +19,7 @@ export type TEditableField = {
 
 export type TFormElement = TextFieldProps & {
     options?: TAutocompleteOption[]
+    defaultValue?: string | number
 }
 
 export type TAutocompleteOption = {

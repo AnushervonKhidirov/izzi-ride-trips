@@ -1,5 +1,5 @@
-import type { FC, FormEvent, MouseEvent } from 'react'
-import type { OutlinedInputProps, TextFieldProps } from '@mui/material'
+import type { FC, MouseEvent } from 'react'
+import type { OutlinedInputProps } from '@mui/material'
 import type { TAutocompleteOption, TFormElement } from '@type/form'
 
 import { useRef, useState } from 'react'
@@ -11,7 +11,6 @@ import {
     OutlinedInput,
     Autocomplete,
     TextField,
-    Box,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
@@ -24,7 +23,7 @@ import ImagePicker from '@common/image-picker/image-picker'
 
 import { Event } from '@constant/event'
 
-export const Input: FC<TFormElement> = ({ name, type = 'text', options, label, placeholder, required, className }) => {
+export const Input: FC<TFormElement> = ({ name, type = 'text', options, defaultValue, label, placeholder, required, className }) => {
     const inputsWithoutLabel = ['date']
 
     const InputVariants: { [key: string]: FC<any> } = {
@@ -36,7 +35,7 @@ export const Input: FC<TFormElement> = ({ name, type = 'text', options, label, p
 
     if (options) return <SelectAutocomplete name={name} label={label} required={required} options={options} />
 
-    const Input: FC<TextFieldProps> = type in InputVariants ? InputVariants[type] : InputVariants.default
+    const Input: FC<TFormElement> = type in InputVariants ? InputVariants[type] : InputVariants.default
 
     return (
         <FormControl className={className}>
@@ -53,6 +52,7 @@ export const Input: FC<TFormElement> = ({ name, type = 'text', options, label, p
                 label={label}
                 required={required}
                 placeholder={placeholder}
+                value={defaultValue}
                 style={{ fontSize: '1em' }}
             />
         </FormControl>
@@ -117,10 +117,11 @@ export const DateTimePicker: FC<OutlinedInputProps> = ({ size, name, label, requ
     )
 }
 
-export const SelectAutocomplete: FC<TextFieldProps & { options: TAutocompleteOption[] }> = ({
+export const SelectAutocomplete: FC<TFormElement> = ({
     name,
     label,
-    options,
+    options = [],
+    defaultValue,
     required,
     className,
 }) => {
@@ -142,7 +143,7 @@ export const SelectAutocomplete: FC<TextFieldProps & { options: TAutocompleteOpt
             ref={autocompleteRef}
             className={className}
             sx={{ '& * ': { fontSize: '1em !important' } }}
-            renderInput={params => <TextField {...params} name={name} required={required} label={label} />}
+            renderInput={params => <TextField {...params} name={name} value={defaultValue} required={required} label={label} />}
             renderOption={(props, option) => {
                 return (
                     <li style={{ fontSize: '1.25em', padding: '0.5em 1em' }} {...props} key={option.id}>
