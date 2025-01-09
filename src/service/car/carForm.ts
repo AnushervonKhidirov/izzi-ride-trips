@@ -10,13 +10,11 @@ import axios from 'axios'
 import carImage from '@public/images/car.png'
 
 export class CarForm {
-    token: string
-    defaultValues: TDefaultFormElementData[] | undefined
-    formData: TFormElement[]
+    private readonly token: string
+    readonly defaultValues: TDefaultFormElementData[] | undefined
+    formList: TFormElement[]
     manufacturerList: TCarManufacturer[]
     modelList: TCarModel[]
-    manufacturerOptions: TAutocompleteOption[]
-    modelOptions: TCarModelOption[]
 
     constructor(token: string, defaultValues?: TDefaultFormElementData[]) {
         this.token = token
@@ -25,10 +23,7 @@ export class CarForm {
         this.manufacturerList = []
         this.modelList = []
 
-        this.manufacturerOptions = []
-        this.modelOptions = []
-
-        this.formData = [
+        this.formList = [
             {
                 name: 'image',
                 type: 'image',
@@ -69,13 +64,26 @@ export class CarForm {
         ]
     }
 
-    getFormData() {
-        return this.formData
+    getFormList() {
+        return this.formList
     }
 
-    updateFormData() {}
+    updateFormList(name: string, value: TAutocompleteOption[]) {
+        this.formList = this.formList.map(formListItem => {
+            if (formListItem.name === name) {
+                return {
+                    ...formListItem,
+                    options: value,
+                }
+            }
 
-    async getManufacturers(): Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]> {
+            return formListItem
+        })
+    }
+
+    async getManufacturers(
+        shouldUpdateFormList?: boolean,
+    ): Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]> {
         try {
             const response = await axios.get<TResponse<TCarManufacturer[]>>(Endpoint.CarManufacturers, {
                 headers: {
@@ -89,13 +97,17 @@ export class CarForm {
                 })
             }
 
-            return [response.data.data, null]
+            this.manufacturerList = response.data.data
+
+            if (shouldUpdateFormList) this.updateFormList('manufacturer', this.getManufacturersOptions())
+
+            return [this.manufacturerList, null]
         } catch (err: any) {
             return [null, err]
         }
     }
 
-    async getModels(): Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]> {
+    async getAllModels(shouldUpdateFormList?: boolean): Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]> {
         try {
             const response = await axios.get<TResponse<TCarModel[]>>(Endpoint.CarModels, {
                 headers: {
@@ -109,21 +121,54 @@ export class CarForm {
                 })
             }
 
-            return [response.data.data, null]
+            this.modelList = response.data.data
+
+            if (shouldUpdateFormList) this.updateFormList('model', this.getModelOptions())
+
+            return [this.modelList, null]
         } catch (err: any) {
             return [null, err]
         }
     }
 
-    convertManufacturersToOptions() {
-        this.manufacturerOptions = this.manufacturerList.map<TAutocompleteOption>(manufacturer => ({
+    async getManufacturerModels(
+        id: number,
+        shouldUpdateFormList?: boolean,
+    ): Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]> {
+        const endpoint = Endpoint.CarManufacturerModels.replace('[id]', id.toString())
+
+        try {
+            const response = await axios.get<TResponse<TCarModel[]>>(endpoint, {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                },
+            })
+
+            if (response.status !== 200 || !response.data.data) {
+                throw new Error(response.data.message, {
+                    cause: response,
+                })
+            }
+
+            this.modelList = response.data.data
+
+            if (shouldUpdateFormList) this.updateFormList('model', this.getModelOptions())
+
+            return [this.modelList, null]
+        } catch (err: any) {
+            return [null, err]
+        }
+    }
+
+    getManufacturersOptions() {
+        return this.manufacturerList.map<TAutocompleteOption>(manufacturer => ({
             id: manufacturer.id,
             label: manufacturer.name,
         }))
     }
 
-    convertModuleToOptions() {
-        this.modelOptions = this.modelList.map<TCarModelOption>(model => ({
+    getModelOptions() {
+        return this.modelList.map<TCarModelOption>(model => ({
             id: model.id,
             label: model.name,
             manufacturer_id: model.manufacturer_id,
