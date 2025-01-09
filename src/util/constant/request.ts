@@ -10,6 +10,7 @@ export enum Endpoint {
     Cars = `${endpoint}/user/cars`,
     CarManufacturers = `${endpoint}/car/manufacturers`,
     CarModels = `${endpoint}/car/models`,
+    CarCarManufacturerModels = `${endpoint}/car/models?manufacturer_id=[id]`,
     Trip = `${endpoint}/`,
     Trips = `${endpoint}/`,
 }
