@@ -1,11 +1,12 @@
 'use client'
 import type { FormEvent } from 'react'
 import type { TAutocompleteOption, TFormElement } from '@type/form'
+import type { TCarManufacturer, TCarModel } from '@type/car'
 
 import { useState, useEffect, useRef } from 'react'
 import { useCookies } from 'next-client-cookies'
 
-import Cars from '@service/car/cars'
+import { CarForm } from '@service/car/carForm'
 
 import Section from '@common/section/section'
 import { FormBtn } from '@common/button/button'
@@ -17,14 +18,16 @@ import { Event } from '@constant/event'
 import classes from './add-car-page.module.css'
 
 const AddCarPage = () => {
-    const cars = new Cars()
+    const cookie = useCookies()
+    const token = cookie.get(Token.Access) ?? ''
+
+    const carForm = new CarForm(token)
+
     const formElement = useRef<HTMLFormElement>(null)
 
-    const cookie = useCookies()
-    const token = cookie.get(Token.Access)
-
-    const [carFormData, setCarFormData] = useState<TFormElement[]>([])
-    const [carFormDataDynamic, setCarFormDataDynamic] = useState<TFormElement[]>([])
+    const [carFormData, setCarFormData] = useState<TFormElement[]>(carForm.defaultFormList)
+    // const [carManufacturers, setCarManufacturers] = useState<TCarManufacturer[]>([])
+    // const [carModels, setCarModels] = useState<TCarModel[]>([])
 
     const [loading, setLoading] = useState(false)
 
@@ -40,52 +43,37 @@ const AddCarPage = () => {
         console.log('body', body)
     }
 
-    async function prepareForm(token: string) {
-        const carFormData = await cars.addCarFormData(token)
-        setCarFormData(carFormData)
+    async function prepareForm() {
+        const [manufacturers, err] = await carForm.getManufacturers()
 
-        setCarFormDataDynamic(() => {
-            return carFormData.map(formElement => {
-                if (formElement.name === 'model') {
-                    return {
-                        ...formElement,
-                        options: [],
-                    }
-                }
+        if (err) return
 
-                return formElement
-            })
-        })
+        setCarFormData(
+            carForm.updateFormList(carFormData, {
+                name: 'manufacturer',
+                value: carForm.getManufacturersOptions(manufacturers),
+            }),
+        )
     }
 
     async function autocompleteEventHandler(e: CustomEventInit<TAutocompleteOption>) {
-        if (!token || !e.detail) return
+        if (!e.detail || e.detail.manufacturer_id) return
 
-        const allModels = carFormData.find(data => data.name === 'model')
-        const manufacturerId = e.detail.id
+        const [models, err] = await carForm.getManufacturerModels(e.detail.id)
 
-        if (allModels && allModels.options) {
-            const options = allModels.options as (TAutocompleteOption & { manufacturer_id: number })[]
-            const availableModels = options.filter(model => model.manufacturer_id === manufacturerId)
+        if (err) return
 
-            setCarFormDataDynamic(formElements => {
-                return formElements.map(formElement => {
-                    if (formElement.name === 'model') {
-                        return {
-                            ...formElement,
-                            options: availableModels,
-                        }
-                    }
-
-                    return formElement
-                })
-            })
-        }
+        setCarFormData(
+            carForm.updateFormList(carFormData, {
+                name: 'model',
+                value: carForm.getModelOptions(models),
+            }),
+        )
     }
 
     useEffect(() => {
-        if (token) prepareForm(token)
-    }, [token])
+        prepareForm()
+    }, [])
 
     useEffect(() => {
         formElement.current?.addEventListener(Event.Autocomplete, autocompleteEventHandler)
@@ -96,10 +84,10 @@ const AddCarPage = () => {
     })
 
     return (
-        carFormDataDynamic.length > 0 && (
+        carFormData.length > 0 && (
             <Section title="Add Car">
                 <form onSubmit={onSubmit} ref={formElement} className={classes.form}>
-                    {carFormDataDynamic.map(input => {
+                    {carFormData.map(input => {
                         return (
                             <Input
                                 name={input.name}
@@ -109,6 +97,7 @@ const AddCarPage = () => {
                                 required={input.required}
                                 options={input.options}
                                 defaultValue={input.defaultValue}
+                                disabled={input.disabled}
                                 key={input.name}
                             />
                         )
