@@ -11,8 +11,8 @@ import carImage from '@public/images/car.png'
 
 export class CarForm implements ICarsForm {
     private readonly token: string
+    private readonly preferencesFields: string[]
     readonly defaultValues: TDefaultFormElementData[] | undefined
-    readonly preferencesFields: string[]
     defaultFormList: TFormElement[]
 
     constructor(token: string, defaultValues?: TDefaultFormElementData[]) {
