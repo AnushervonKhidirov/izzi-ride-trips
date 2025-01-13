@@ -28,6 +28,7 @@ export const Input: FC<TFormElement> = ({
     type = 'text',
     options,
     defaultValue,
+    disabled,
     label,
     placeholder,
     required,
@@ -49,6 +50,7 @@ export const Input: FC<TFormElement> = ({
                 label={label}
                 defaultValue={defaultValue}
                 required={required}
+                disabled={disabled}
                 options={options}
             />
         )
@@ -65,6 +67,7 @@ export const Input: FC<TFormElement> = ({
             <Input
                 size="small"
                 id={name}
+                disabled={disabled}
                 name={name}
                 type={type}
                 label={label}
@@ -141,6 +144,7 @@ export const SelectAutocomplete: FC<TFormElement> = ({
     options = [],
     defaultValue,
     required,
+    disabled,
     className,
 }) => {
     const autocompleteRef = useRef<HTMLElement>(null)
@@ -161,6 +165,7 @@ export const SelectAutocomplete: FC<TFormElement> = ({
             ref={autocompleteRef}
             className={className}
             sx={{ '& * ': { fontSize: '1em !important' } }}
+            disabled={disabled}
             defaultValue={typeof defaultValue === 'object' ? defaultValue : undefined}
             renderInput={params => <TextField {...params} name={name} required={required} label={label} />}
             renderOption={(props, option) => {
