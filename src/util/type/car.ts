@@ -9,9 +9,15 @@ export interface ICars {
     getCreateCarUrl: () => string
     fetchCars: (token: string) => Promise<[TCar[], null] | [null, ErrorCustom<Response>]>
     fetchCar: (id: string, token: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
-    getManufacturers: (token: string) => Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]>
-    getModels: (token: string) => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
-    addCarFormData: (token: string) => Promise<TFormElement[]>
+}
+
+export interface ICarsForm {
+    updateFormList: (list: TFormElement[], data: { name: string; value: TAutocompleteOption[] }) => TFormElement[]
+    getManufacturers: () => Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]>
+    getAllModels: () => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
+    getManufacturerModels: (id: number) => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
+    getManufacturersOptions: (list: TCarManufacturer[]) => void
+    getModelOptions: (list: TCarModel[]) => void
 }
 
 // Car
