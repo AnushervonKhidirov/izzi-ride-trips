@@ -12,11 +12,13 @@ import carImage from '@public/images/car.png'
 export class CarForm implements ICarsForm {
     private readonly token: string
     readonly defaultValues: TDefaultFormElementData[] | undefined
+    readonly preferencesFields: string[]
     defaultFormList: TFormElement[]
 
     constructor(token: string, defaultValues?: TDefaultFormElementData[]) {
         this.token = token
         this.defaultValues = defaultValues
+        this.preferencesFields = ['smoking', 'child_car_seat', 'animals', 'luggage']
 
         this.defaultFormList = [
             {
@@ -90,6 +92,10 @@ export class CarForm implements ICarsForm {
 
             return formListItem
         })
+    }
+
+    getPreferencesFields() {
+        return this.preferencesFields
     }
 
     async getManufacturers(): Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]> {

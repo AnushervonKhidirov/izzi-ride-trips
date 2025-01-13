@@ -18,6 +18,7 @@ export interface ICarsForm {
     getManufacturerModels: (id: number) => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
     getManufacturersOptions: (list: TCarManufacturer[]) => void
     getModelOptions: (list: TCarModel[]) => void
+    getPreferencesFields: () => string[]
 }
 
 // Car
