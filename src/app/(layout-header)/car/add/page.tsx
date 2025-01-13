@@ -1,7 +1,6 @@
 'use client'
 import type { FormEvent } from 'react'
 import type { TAutocompleteOption, TFormElement } from '@type/form'
-import type { TCarManufacturer, TCarModel } from '@type/car'
 
 import { useState, useEffect, useRef } from 'react'
 import { useCookies } from 'next-client-cookies'
@@ -10,7 +9,7 @@ import { CarForm } from '@service/car/carForm'
 
 import Section from '@common/section/section'
 import { FormBtn } from '@common/button/button'
-import { Input } from '@common/input/input'
+import { Input, SwitchInput } from '@common/input/input'
 
 import { Token } from '@constant/request'
 import { Event } from '@constant/event'
@@ -26,8 +25,6 @@ const AddCarPage = () => {
     const formElement = useRef<HTMLFormElement>(null)
 
     const [carFormData, setCarFormData] = useState<TFormElement[]>(carForm.defaultFormList)
-    // const [carManufacturers, setCarManufacturers] = useState<TCarManufacturer[]>([])
-    // const [carModels, setCarModels] = useState<TCarModel[]>([])
 
     const [loading, setLoading] = useState(false)
 
@@ -97,6 +94,7 @@ const AddCarPage = () => {
                                 required={input.required}
                                 options={input.options}
                                 defaultValue={input.defaultValue}
+                                defaultChecked={input.defaultChecked}
                                 disabled={input.disabled}
                                 key={input.name}
                             />

@@ -56,6 +56,26 @@ export class CarForm implements ICarsForm {
                 label: 'Plate',
                 required: true,
             },
+            {
+                name: 'smoking',
+                type: 'checkbox',
+                label: 'Smoking',
+            },
+            {
+                name: 'child_car_seat',
+                type: 'checkbox',
+                label: 'Child car seat',
+            },
+            {
+                name: 'animals',
+                type: 'checkbox',
+                label: 'Animals',
+            },
+            {
+                name: 'luggage',
+                type: 'checkbox',
+                label: 'Luggage',
+            },
         ]
     }
 
