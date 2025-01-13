@@ -25,6 +25,7 @@ export type TFormElement = TextFieldProps & {
 export type TAutocompleteOption = {
     id: number
     label: string
+    [key: string]: string | number
 }
 
 export type TDefaultFormElementData = {
