@@ -36,8 +36,19 @@ const AddCarPage = () => {
         const formData = new FormData(e.currentTarget)
         const body = Object.fromEntries(formData)
 
+        const preferencesFields = carForm.getPreferencesFields()
+        const preferencesBody: { [key: string]: boolean } = {}
+
+        preferencesFields.forEach(preferences => {
+            preferencesBody[preferences] = body[preferences] === 'on'
+            delete body[preferences]
+        })
+
+        const finalBody = { ...body, preferences: preferencesBody }
+
         setLoading(false)
-        console.log('body', body)
+
+        console.log('body', finalBody)
     }
 
     async function prepareForm() {
