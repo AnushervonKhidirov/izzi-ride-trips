@@ -11,6 +11,8 @@ import {
     OutlinedInput,
     Autocomplete,
     TextField,
+    Switch,
+    FormControlLabel,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
@@ -28,18 +30,20 @@ export const Input: FC<TFormElement> = ({
     type = 'text',
     options,
     defaultValue,
+    defaultChecked,
     disabled,
     label,
     placeholder,
     required,
     className,
 }) => {
-    const inputsWithoutLabel = ['date']
+    const inputsWithoutLabel = ['date', 'checkbox']
 
     const InputVariants: { [key: string]: FC<any> } = {
         password: PasswordInput,
         image: ImagePicker,
         date: DateTimePicker,
+        checkbox: SwitchInput,
         default: OutlinedInput,
     }
 
@@ -73,6 +77,8 @@ export const Input: FC<TFormElement> = ({
                 label={label}
                 required={required}
                 placeholder={placeholder}
+                defaultChecked={defaultChecked}
+                defaultValue={defaultValue}
                 value={defaultValue}
                 style={{ fontSize: '1em' }}
             />
@@ -114,6 +120,16 @@ export const PasswordInput: FC<OutlinedInputProps> = ({ size, name, label, requi
                     </IconButton>
                 </InputAdornment>
             }
+        />
+    )
+}
+
+export const SwitchInput: FC<TFormElement> = ({ name, label, defaultChecked }) => {
+    return (
+        <FormControlLabel
+            sx={{ '& * ': { fontSize: '1em !important' } }}
+            label={label}
+            control={<Switch name={name} defaultChecked={defaultChecked} />}
         />
     )
 }
