@@ -2,8 +2,8 @@ import type { TUser } from './auth'
 
 export type TChatInfo = {
     id: number | string
-    firstName: TUser['firstName']
-    lastName: TUser['lastName']
+    firstName: TUser['first_name']
+    lastName: TUser['first_name']
 }
 
 export type TChatMessage = {
