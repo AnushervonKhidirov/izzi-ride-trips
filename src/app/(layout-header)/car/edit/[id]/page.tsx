@@ -13,22 +13,21 @@ import { Token } from '@constant/request'
 
 const EditCarPage = () => {
     const params = useParams()
-
     const cookie = useCookies()
-    const token = cookie.get(Token.Access)
+    const token = cookie.get(Token.Access) ?? ''
 
-    const cars = new Cars()
+    const cars = new Cars(token)
     const [carData, setCarData] = useState<TCar | null>(null)
 
-    async function getData(token: string) {
+    async function getData() {
         if (typeof params.id !== 'string') return
-        const [data, err] = await cars.fetchCar(params.id, token)
+        const [data, err] = await cars.fetchCar(params.id)
         if (err) return
         setCarData(data)
     }
 
     useEffect(() => {
-        if (token) getData(token)
+        getData()
     }, [token])
 
     return <Section title="Edit Car">{carData && <CarEditableFields carData={carData} />}</Section>

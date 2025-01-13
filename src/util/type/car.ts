@@ -7,8 +7,8 @@ import type { TAutocompleteOption, TEditableField, TFormElement } from './form'
 // Cars
 export interface ICars {
     getCreateCarUrl: () => string
-    fetchCars: (token: string) => Promise<[TCar[], null] | [null, ErrorCustom<Response>]>
-    fetchCar: (id: string, token: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
+    fetchCars: () => Promise<[TCar[], null] | [null, ErrorCustom<Response>]>
+    fetchCar: (id: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
 }
 
 export interface ICarsForm {

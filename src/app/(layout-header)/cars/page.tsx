@@ -14,14 +14,15 @@ import { Button } from '@common/button/button'
 import { Token } from '@constant/request'
 
 const CarsPage = () => {
-    const cars = new Cars()
     const cookie = useCookies()
-    const token = cookie.get(Token.Access)
+    const token = cookie.get(Token.Access) ?? ''
+
+    const cars = new Cars(token)
 
     const [carList, setCarList] = useState<TCar[]>([])
 
-    async function getData(token: string) {
-        const [data, err] = await cars.fetchCars(token)
+    async function getData() {
+        const [data, err] = await cars.fetchCars()
         if (err) return
         setCarList(data)
     }
@@ -34,7 +35,7 @@ const CarsPage = () => {
     }
 
     useEffect(() => {
-        if (token) getData(token)
+        getData()
     }, [token])
 
     return (

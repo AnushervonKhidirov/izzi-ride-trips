@@ -8,15 +8,21 @@ import { Page } from '@constant/links'
 import { Endpoint } from '@constant/request'
 
 export default class Cars implements ICars {
+    private readonly token: string
+
+    constructor(token: string) {
+        this.token = token
+    }
+
     getCreateCarUrl() {
         return Page.AddCar
     }
 
-    async fetchCar(id: string, token: string): Promise<[TCar, null] | [null, ErrorCustom<Response>]> {
+    async fetchCar(id: string): Promise<[TCar, null] | [null, ErrorCustom<Response>]> {
         try {
             const response = await axios.get<TResponse<TCar[]>>(Endpoint.Cars, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${this.token}`,
                 },
             })
 
@@ -36,11 +42,11 @@ export default class Cars implements ICars {
         }
     }
 
-    async fetchCars(token: string): Promise<[TCar[], null] | [null, ErrorCustom<Response>]> {
+    async fetchCars(): Promise<[TCar[], null] | [null, ErrorCustom<Response>]> {
         try {
             const response = await axios.get<TResponse<TCar[]>>(Endpoint.Cars, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${this.token}`,
                 },
             })
 
