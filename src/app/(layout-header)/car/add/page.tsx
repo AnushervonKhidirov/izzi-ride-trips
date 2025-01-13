@@ -9,7 +9,7 @@ import { CarForm } from '@service/car/carForm'
 
 import Section from '@common/section/section'
 import { FormBtn } from '@common/button/button'
-import { Input, SwitchInput } from '@common/input/input'
+import { Input } from '@common/input/input'
 
 import { Token } from '@constant/request'
 import { Event } from '@constant/event'
