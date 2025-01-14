@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useCookies } from 'next-client-cookies'
 
 import { CarForm } from '@service/car/carForm'
+import Cars from '@service/car/cars'
 
 import Section from '@common/section/section'
 import { FormBtn } from '@common/button/button'
@@ -20,7 +21,8 @@ const AddCarPage = () => {
     const cookie = useCookies()
     const token = cookie.get(Token.Access) ?? ''
 
-    const carForm = new CarForm(token)
+    const carForm = new CarForm()
+    const cars = new Cars(token)
 
     const formElement = useRef<HTMLFormElement>(null)
 
@@ -52,7 +54,7 @@ const AddCarPage = () => {
     }
 
     async function prepareForm() {
-        const [manufacturers, err] = await carForm.getManufacturers()
+        const [manufacturers, err] = await cars.getManufacturers()
 
         if (err) return
 
@@ -67,7 +69,7 @@ const AddCarPage = () => {
     async function autocompleteEventHandler(e: CustomEventInit<TAutocompleteOption>) {
         if (!e.detail || e.detail.manufacturer_id) return
 
-        const [models, err] = await carForm.getManufacturerModels(e.detail.id)
+        const [models, err] = await cars.getManufacturerModels(e.detail.id)
 
         if (err) return
 

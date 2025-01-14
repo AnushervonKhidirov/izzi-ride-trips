@@ -22,7 +22,7 @@ const CarsPage = () => {
     const [carList, setCarList] = useState<TCar[]>([])
 
     async function getData() {
-        const [data, err] = await cars.fetchCars()
+        const [data, err] = await cars.getCars()
         if (err) return
         setCarList(data)
     }

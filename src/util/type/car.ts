@@ -7,15 +7,15 @@ import type { TAutocompleteOption, TEditableField, TFormElement } from './form'
 // Cars
 export interface ICars {
     getCreateCarUrl: () => string
-    fetchCars: () => Promise<[TCar[], null] | [null, ErrorCustom<Response>]>
-    fetchCar: (id: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
+    getCars: () => Promise<[TCar[], null] | [null, ErrorCustom<Response>]>
+    getCar: (id: string) => Promise<[TCar, null] | [null, ErrorCustom<Response>]>
+    getManufacturers: () => Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]>
+    getAllModels: () => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
+    getManufacturerModels: (id: number) => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
 }
 
 export interface ICarsForm {
     updateFormList: (list: TFormElement[], data: { name: string; value: TAutocompleteOption[] }) => TFormElement[]
-    getManufacturers: () => Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]>
-    getAllModels: () => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
-    getManufacturerModels: (id: number) => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
     getManufacturersOptions: (list: TCarManufacturer[]) => void
     getModelOptions: (list: TCarModel[]) => void
     getPreferencesFields: () => string[]

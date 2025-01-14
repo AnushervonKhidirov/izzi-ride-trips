@@ -1,4 +1,4 @@
-import type { ICars, TCar } from '@type/car'
+import type { ICars, TCar, TCarManufacturer, TCarModel } from '@type/car'
 import type { ErrorCustom } from '@type/error'
 import type { TResponse } from '@type/auth'
 
@@ -18,7 +18,7 @@ export default class Cars implements ICars {
         return Page.AddCar
     }
 
-    async fetchCar(id: string): Promise<[TCar, null] | [null, ErrorCustom<Response>]> {
+    async getCar(id: string): Promise<[TCar, null] | [null, ErrorCustom<Response>]> {
         try {
             const response = await axios.get<TResponse<TCar[]>>(Endpoint.Cars, {
                 headers: {
@@ -42,9 +42,71 @@ export default class Cars implements ICars {
         }
     }
 
-    async fetchCars(): Promise<[TCar[], null] | [null, ErrorCustom<Response>]> {
+    async getCars(): Promise<[TCar[], null] | [null, ErrorCustom<Response>]> {
         try {
             const response = await axios.get<TResponse<TCar[]>>(Endpoint.Cars, {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                },
+            })
+
+            if (response.status !== 200 || !response.data.data) {
+                throw new Error(response.data.message, {
+                    cause: response,
+                })
+            }
+
+            return [response.data.data, null]
+        } catch (err: any) {
+            return [null, err]
+        }
+    }
+
+    async getManufacturers(): Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]> {
+        try {
+            const response = await axios.get<TResponse<TCarManufacturer[]>>(Endpoint.CarManufacturers, {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                },
+            })
+
+            if (response.status !== 200 || !response.data.data) {
+                throw new Error(response.data.message, {
+                    cause: response,
+                })
+            }
+
+            return [response.data.data, null]
+        } catch (err: any) {
+            return [null, err]
+        }
+    }
+
+    async getAllModels(): Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]> {
+        try {
+            const response = await axios.get<TResponse<TCarModel[]>>(Endpoint.CarModels, {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                },
+            })
+
+            if (response.status !== 200 || !response.data.data) {
+                throw new Error(response.data.message, {
+                    cause: response,
+                })
+            }
+
+            return [response.data.data, null]
+        } catch (err: any) {
+            return [null, err]
+        }
+    }
+
+    async getManufacturerModels(id: number): Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]> {
+        const endpoint = Endpoint.CarManufacturerModels.replace('[id]', id.toString())
+
+        try {
+            const response = await axios.get<TResponse<TCarModel[]>>(endpoint, {
                 headers: {
                     Authorization: `Bearer ${this.token}`,
                 },

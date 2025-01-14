@@ -21,7 +21,7 @@ const EditCarPage = () => {
 
     async function getData() {
         if (typeof params.id !== 'string') return
-        const [data, err] = await cars.fetchCar(params.id)
+        const [data, err] = await cars.getCar(params.id)
         if (err) return
         setCarData(data)
     }
