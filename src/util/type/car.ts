@@ -32,7 +32,7 @@ export interface ICar extends TCar {
     getEditableFields: () => TEditableField[]
 }
 
-export type TCar = Readonly<{
+export type TCar = {
     car_id: number
     number_of_seats: number
     model: string
@@ -42,7 +42,16 @@ export type TCar = Readonly<{
     year: string | number
     preferences: TCarPreferences
     image?: string
-}>
+}
+
+export type TCarFormBody = Omit<TCar, 'car_id' | 'model' | 'manufacturer'> &
+    Partial<TCar['model']> & {
+        manufacturer_id: number
+        model_id: number
+        role_id: number
+        model?: string
+        manufacturer?: string
+    }
 
 export type TCarPreferences = {
     smoking: boolean
