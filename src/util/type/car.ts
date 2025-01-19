@@ -19,6 +19,7 @@ export interface ICarsForm {
     getManufacturersOptions: (list: TCarManufacturer[]) => void
     getModelOptions: (list: TCarModel[]) => void
     getPreferencesFields: () => string[]
+    getAddCarBody: (form: HTMLFormElement, models: TCarModel[], roleId: number) => TCarFormBody | null
 }
 
 // Car
@@ -38,20 +39,31 @@ export type TCar = {
     model: string
     manufacturer: string
     auto_number: string
-    color: string
+    color: string | null
     year: string | number
     preferences: TCarPreferences
     image?: string
 }
 
-export type TCarFormBody = Omit<TCar, 'car_id' | 'model' | 'manufacturer'> &
-    Partial<TCar['model']> & {
-        manufacturer_id: number
-        model_id: number
-        role_id: number
-        model?: string
-        manufacturer?: string
-    }
+export type TCarFormBody = Omit<TCar, 'car_id' | 'model' | 'manufacturer'> & {
+    role_id: number
+    manufacturer_id: number
+    model_id: number
+}
+
+export type TCarFormEntries = {
+    image?: string
+    manufacturer: string
+    model: string
+    number_of_seats: number
+    year: string | number
+    auto_number: string
+    color: string
+    animals?: string
+    child_car_seat?: string
+    luggage?: string
+    smoking?: string
+}
 
 export type TCarPreferences = {
     smoking: boolean
