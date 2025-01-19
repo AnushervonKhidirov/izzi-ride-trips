@@ -23,7 +23,7 @@ export default class Car implements ICar {
         this.model = car.model
         this.image = car.image
         this.number_of_seats = car.number_of_seats
-        this.color = car.color
+        this.color = car.color ?? '#00000000'
         this.auto_number = car.auto_number
         this.year = car.year
         this.preferences = car.preferences
