@@ -18,15 +18,16 @@
 }
 
 .preferences {
-    grid-area: preferences;
     display: flex;
-    flex-wrap: wrap;
+    grid-area: preferences;
+    align-self: self-end;
     font-size: 1em;
+    flex-wrap: wrap;
 }
 
 .action_buttons {
-    grid-area: btn;
     display: grid;
+    grid-area: btn;
     gap: 1rem;
 }
 
@@ -34,11 +35,19 @@
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;
+    align-items: center;
+}
+
+.color {
+    width: 2em;
+    height: 80%;
+    border-radius: 0.2em;
 }
 
 @media screen and (min-width: 426px) {
     .car_card {
         grid-template-areas: 'image' 'about' 'preferences' 'btn';
+        grid-template-rows: max-content max-content 1fr max-content;
     }
 
     .image {

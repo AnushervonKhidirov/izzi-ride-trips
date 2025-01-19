@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import type { TCar } from '@type/car'
-import type { TChip, TProperty } from '@type/common'
+import type { TProperty } from '@type/common'
 import type { TNavigationData } from '@type/navigation'
 import type { StaticImageData } from 'next/image'
 
@@ -20,7 +20,7 @@ const CarCard: FC<{ carData: TCar }> = ({ carData }) => {
         <Card className={classes.car_card} tag="li">
             <CarImage image={car.getImageData()} title={car.getCarName()} />
             <About title={car.getCarName()} properties={car.getProperties()} />
-            <ChipList list={car.getPreferences()} />
+            <ChipList className={classes.preferences} list={car.getPreferences()} />
             <Actions links={car.getActionButtons()} />
         </Card>
     )
@@ -44,11 +44,20 @@ const About: FC<{ title: string; properties: TProperty[] }> = ({ title, properti
 const Desc: FC<{ properties: TProperty[] }> = ({ properties }) => {
     return (
         <ul className={classes.properties}>
-            {properties.map(property => {
-                return (
-                    <li key={property.name}>
-                        <span>{property.name}:</span>
-                        <span>{property.value}</span>
+            {properties.map(({ name, value }) => {
+                if (name === 'Color') {
+                    console.log('name', name);
+                    console.log('value', value);
+                }
+                
+                return value && (
+                    <li key={name}>
+                        <span>{name}:</span>
+                        {name === 'Color' ? (
+                            <span className={classes.color} style={{ backgroundColor: value.toString() }}></span>
+                        ) : (
+                            <span>{value}</span>
+                        )}
                     </li>
                 )
             })}
