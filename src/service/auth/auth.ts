@@ -1,5 +1,6 @@
 import type { ErrorCustom } from '@type/error'
-import type { TUser, TTokens, TLogInData, TResponse } from '@type/auth'
+import type { TUser, TTokens, TLogInData } from '@type/auth'
+import { TResponse } from '@type/form'
 
 import axios from 'axios'
 
