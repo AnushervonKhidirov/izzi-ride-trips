@@ -1,6 +1,7 @@
 'use client'
 import type { FormEvent } from 'react'
 import type { TAutocompleteOption, TFormElement } from '@type/form'
+import type { TCarModel } from '@type/car'
 
 import { useState, useEffect, useRef } from 'react'
 import { useCookies } from 'next-client-cookies'
@@ -27,6 +28,7 @@ const AddCarPage = () => {
     const formElement = useRef<HTMLFormElement>(null)
 
     const [carFormData, setCarFormData] = useState<TFormElement[]>(carForm.defaultFormList)
+    const [carModels, setCarModels] = useState<TCarModel[]>([])
 
     const [loading, setLoading] = useState(false)
 
@@ -35,22 +37,10 @@ const AddCarPage = () => {
 
         setLoading(true)
 
-        const formData = new FormData(e.currentTarget)
-        const body = Object.fromEntries(formData)
-
-        const preferencesFields = carForm.getPreferencesFields()
-        const preferencesBody: { [key: string]: boolean } = {}
-
-        preferencesFields.forEach(preferences => {
-            preferencesBody[preferences] = body[preferences] === 'on'
-            delete body[preferences]
-        })
-
-        const finalBody = { ...body, preferences: preferencesBody }
+        const body = carForm.getAddCarBody(e.currentTarget, carModels, 3)
+        if (body) await cars.addCar(body)
 
         setLoading(false)
-
-        console.log('body', finalBody)
     }
 
     async function prepareForm() {
@@ -72,6 +62,8 @@ const AddCarPage = () => {
         const [models, err] = await cars.getManufacturerModels(e.detail.id)
 
         if (err) return
+
+        setCarModels(models)
 
         setCarFormData(
             carForm.updateFormList(carFormData, {
