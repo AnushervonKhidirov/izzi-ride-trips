@@ -1,5 +1,13 @@
 import type { TAutocompleteOption, TDefaultFormElementData, TFormElement } from '@type/form'
-import type { ICarsForm, TCarManufacturer, TCarModel, TCarModelOption } from '@type/car'
+import type {
+    ICarsForm,
+    TCarFormBody,
+    TCarFormEntries,
+    TCarManufacturer,
+    TCarModel,
+    TCarModelOption,
+    TCarPreferences,
+} from '@type/car'
 
 import carImage from '@public/images/car.png'
 
@@ -49,6 +57,11 @@ export class CarForm implements ICarsForm {
                 type: 'text',
                 label: 'Plate',
                 required: true,
+            },
+            {
+                name: 'color',
+                type: 'color',
+                label: 'Color',
             },
             {
                 name: 'smoking',
@@ -103,5 +116,35 @@ export class CarForm implements ICarsForm {
             label: model.name,
             manufacturer_id: model.manufacturer_id,
         }))
+    }
+
+    getAddCarBody(form: HTMLFormElement, models: TCarModel[], roleId: number) {
+        const formData = new FormData(form)
+        const formEntries = Object.fromEntries<unknown>(formData) as TCarFormEntries
+        const model = models.find(model => model.name === formEntries.model)
+        const nullColorValue = '#00000000'
+
+        if (!model) return null
+
+        const preferences: TCarPreferences = {
+            animals: formEntries.animals === 'on',
+            child_car_seat: formEntries.child_car_seat === 'on',
+            luggage: formEntries.luggage === 'on',
+            smoking: formEntries.smoking === 'on',
+        }
+
+        const result: TCarFormBody = {
+            role_id: roleId,
+            auto_number: formEntries.auto_number,
+            manufacturer_id: model.manufacturer_id,
+            model_id: model.id,
+            color: formEntries.color === nullColorValue ? null : formEntries.color,
+            number_of_seats: formEntries.number_of_seats,
+            year: formEntries.year,
+            image: formEntries.image,
+            preferences,
+        }
+
+        return result
     }
 }
