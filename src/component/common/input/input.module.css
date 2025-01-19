@@ -1,0 +1,32 @@
+.color_picker {
+    position: relative;
+}
+
+.color_wrapper {
+    width: 2.5em;
+    height: 1.5em;
+    border: 0.1em solid var(--secondary);
+    border-radius: 0.25em;
+    padding: 0.1em;
+    box-sizing: border-box;
+}
+
+.color_value {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.15em;
+    cursor: pointer;
+}
+
+.color_label {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.color_input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}

@@ -1,4 +1,4 @@
-import type { FC, MouseEvent } from 'react'
+import type { ChangeEvent, FC, MouseEvent, ReactNode } from 'react'
 import type { OutlinedInputProps } from '@mui/material'
 import type { TAutocompleteOption, TFormElement } from '@type/form'
 
@@ -14,16 +14,19 @@ import {
     Switch,
     FormControlLabel,
 } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { Visibility, VisibilityOff, Delete } from '@mui/icons-material'
 
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 
+import Tooltip from '@common/tooltip/tooltip'
 import ImagePicker from '@common/image-picker/image-picker'
 
 import { Event } from '@constant/event'
+
+import classes from './input.module.css'
 
 export const Input: FC<TFormElement> = ({
     name,
@@ -47,7 +50,7 @@ export const Input: FC<TFormElement> = ({
         default: OutlinedInput,
     }
 
-    if (options)
+    if (options) {
         return (
             <SelectAutocomplete
                 name={name}
@@ -58,6 +61,11 @@ export const Input: FC<TFormElement> = ({
                 options={options}
             />
         )
+    }
+
+    if (type === 'color' && (typeof defaultValue === 'string' || typeof defaultValue === 'undefined')) {
+        return <ColorPickerWithLabel label={label} name={name} defaultValue={defaultValue} />
+    }
 
     const Input: FC<TFormElement> = type in InputVariants ? InputVariants[type] : InputVariants.default
 
@@ -195,5 +203,57 @@ export const SelectAutocomplete: FC<TFormElement> = ({
                 if (value) triggerFormEvent(value)
             }}
         />
+    )
+}
+
+export const ColorPickerWithLabel: FC<{ label: ReactNode; name?: string; defaultValue?: string }> = ({
+    label,
+    name,
+    defaultValue,
+}) => {
+    const nullColorValue = '#00000000'
+    const [color, setColor] = useState(defaultValue ?? nullColorValue)
+    const newLabel =
+        color === nullColorValue ? (
+            <span>{label} (not selected)</span>
+        ) : (
+            <span className={classes.color_label}>
+                {label}
+                <Tooltip title="Clear">
+                    <Delete onClick={clearColor} onMouseDown={clearColor} sx={{ verticalAlign: 'center' }} />
+                </Tooltip>
+            </span>
+        )
+
+    function colorHandler(e: ChangeEvent<HTMLInputElement>) {
+        setColor(e.currentTarget.value)
+    }
+
+    function clearColor() {
+        setColor(nullColorValue)
+    }
+
+    return (
+        <FormControlLabel
+            style={{ margin: 0, gap: '0.6em' }}
+            sx={{ '& * ': { fontSize: '1em !important' } }}
+            label={newLabel}
+            control={<ColorPicker name={name} value={color} onChange={colorHandler} />}
+        />
+    )
+}
+
+export const ColorPicker: FC<{
+    name?: string
+    value: string
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+}> = ({ name, value, onChange }) => {
+    return (
+        <div className={classes.color_picker}>
+            <div className={classes.color_wrapper}>
+                <div className={classes.color_value} style={{ backgroundColor: value }}></div>
+            </div>
+            <input className={classes.color_input} value={value} type="color" name={name} onChange={onChange} />
+        </div>
     )
 }
