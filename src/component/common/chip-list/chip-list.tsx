@@ -1,13 +1,14 @@
 import type { FC } from 'react'
-import type { TChip } from '@type/common'
+import type { AdditionalProps, TChip } from '@type/common'
 
 import Chip from '@common/chip/chip'
 
+import classNames from 'classnames'
 import classes from './chip-list.module.css'
 
-const ChipList: FC<{ list: TChip[] }> = ({ list }) => {
+const ChipList: FC<AdditionalProps<{ list: TChip[] }>> = ({ list, className }) => {
     return (
-        <div className={classes.list}>
+        <div className={classNames(classes.list, className)}>
             {list.map(({ name, value }) => {
                 return <Chip name={name} value={value} key={name} />
             })}
