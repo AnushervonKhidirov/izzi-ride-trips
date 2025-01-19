@@ -56,7 +56,7 @@ export default class Car implements ICar {
     }
 
     getCarName() {
-        return `${this.manufacturer} ${this.model}`
+        return `${this.manufacturer} - ${this.model}`
     }
 
     getPreferences() {
