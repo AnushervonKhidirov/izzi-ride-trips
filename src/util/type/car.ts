@@ -2,7 +2,7 @@ import type { StaticImageData } from 'next/image'
 import type { TProperty } from './common'
 import type { ErrorCustom } from './error'
 import type { TNavigationData } from './navigation'
-import type { TAutocompleteOption, TEditableField, TFormElement } from './form'
+import type { TAutocompleteOption, TEditableField, TFormElement, TResponse } from './form'
 
 // Cars
 export interface ICars {
@@ -12,6 +12,7 @@ export interface ICars {
     getManufacturers: () => Promise<[TCarManufacturer[], null] | [null, ErrorCustom<Response>]>
     getAllModels: () => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
     getManufacturerModels: (id: number) => Promise<[TCarModel[], null] | [null, ErrorCustom<Response>]>
+    addCar: (data: TCarFormBody) => Promise<TResponse | null>
 }
 
 export interface ICarsForm {
@@ -39,7 +40,7 @@ export type TCar = {
     model: string
     manufacturer: string
     auto_number: string
-    color: string | null
+    color?: string
     year: string | number
     preferences: TCarPreferences
     image?: string
