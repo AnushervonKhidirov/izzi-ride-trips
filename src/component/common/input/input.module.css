@@ -30,3 +30,7 @@
     height: 0;
     visibility: hidden;
 }
+
+.color_input[type='text'] {
+    display: none;
+}

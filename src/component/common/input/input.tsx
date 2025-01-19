@@ -253,7 +253,9 @@ export const ColorPicker: FC<{
             <div className={classes.color_wrapper}>
                 <div className={classes.color_value} style={{ backgroundColor: value }}></div>
             </div>
-            <input className={classes.color_input} value={value} type="color" name={name} onChange={onChange} />
+
+            <input className={classes.color_input} value={value} type="color" onChange={onChange} />
+            <input className={classes.color_input} type="text" value={value} name={name} readOnly />
         </div>
     )
 }
