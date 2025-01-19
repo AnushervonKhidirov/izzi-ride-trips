@@ -1,6 +1,6 @@
-import type { ICars, TCar, TCarManufacturer, TCarModel } from '@type/car'
+import type { ICars, TCar, TCarFormBody, TCarManufacturer, TCarModel } from '@type/car'
 import type { ErrorCustom } from '@type/error'
-import type { TResponse } from '@type/auth'
+import type { TResponse } from '@type/form'
 
 import axios from 'axios'
 
@@ -121,6 +121,30 @@ export default class Cars implements ICars {
             return [response.data.data, null]
         } catch (err: any) {
             return [null, err]
+        }
+    }
+
+    async addCar(data: TCarFormBody) {
+        console.log('data', data)
+
+        try {
+            const response = await axios.post<TResponse>(Endpoint.AddCar, data, {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                },
+            })
+
+            if (response.status !== 200) {
+                throw new Error(response.data.message, {
+                    cause: response,
+                })
+            }
+
+            console.log(response.data)
+
+            return response.data
+        } catch (err: any) {
+            return null
         }
     }
 }
