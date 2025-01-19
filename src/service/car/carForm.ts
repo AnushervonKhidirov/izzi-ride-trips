@@ -138,11 +138,14 @@ export class CarForm implements ICarsForm {
             auto_number: formEntries.auto_number,
             manufacturer_id: model.manufacturer_id,
             model_id: model.id,
-            color: formEntries.color === nullColorValue ? null : formEntries.color,
-            number_of_seats: formEntries.number_of_seats,
-            year: formEntries.year,
+            number_of_seats: Number(formEntries.number_of_seats),
+            year: formEntries.year.toString(),
             image: formEntries.image,
             preferences,
+        }
+
+        if (formEntries.color !== nullColorValue) {
+            result.color = formEntries.color
         }
 
         return result
