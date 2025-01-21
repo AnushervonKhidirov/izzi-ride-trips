@@ -125,8 +125,6 @@ export default class Cars implements ICars {
     }
 
     async addCar(data: TCarFormBody) {
-        console.log('data', data)
-
         try {
             const response = await axios.post<TResponse>(Endpoint.AddCar, data, {
                 headers: {
@@ -139,8 +137,6 @@ export default class Cars implements ICars {
                     cause: response,
                 })
             }
-
-            console.log(response.data)
 
             return response.data
         } catch (err: any) {
