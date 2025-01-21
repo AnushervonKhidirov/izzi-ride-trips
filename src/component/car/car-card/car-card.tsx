@@ -45,11 +45,6 @@ const Desc: FC<{ properties: TProperty[] }> = ({ properties }) => {
     return (
         <ul className={classes.properties}>
             {properties.map(({ name, value }) => {
-                if (name === 'Color') {
-                    console.log('name', name);
-                    console.log('value', value);
-                }
-                
                 return value && (
                     <li key={name}>
                         <span>{name}:</span>
