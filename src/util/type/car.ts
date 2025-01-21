@@ -21,6 +21,8 @@ export interface ICarsForm {
     getModelOptions: (list: TCarModel[]) => void
     getPreferencesFields: () => string[]
     getAddCarBody: (form: HTMLFormElement, models: TCarModel[], roleId: number) => TCarFormBody | null
+    getEditCarBody: (form: HTMLFormElement, models: TCarModel, roleId: number) => TCarFormBody | null
+    getEditableFormList: (car: TCar, data: { manufacturer: TCarManufacturer; model: TCarModel }) => TFormElement[]
 }
 
 // Car
